@@ -1,4 +1,4 @@
-# Mathématiques - CCTLs Blancs et Fiches de Revisions
+# Mathématiques - CCTLs Blancs et Fiches de Révision
 
 - **Formation** : CPIA2 Informatique
 - **Année universitaire** : 2025 / 2026

@@ -22,7 +22,7 @@
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[L]{\small\textit{Mathématiques - Corrigé pédagogique}}
-\fancyhead[R]{\small\textit{Épreuve de synthèse — Analyse}}
+\fancyhead[R]{\small\textit{Épreuve de synthèse - Analyse}}
 \fancyfoot[C]{\small Page \thepage\ / \pageref{LastPage}}
 \renewcommand{\headrulewidth}{0.3pt}
 \renewcommand{\footrulewidth}{0pt}
@@ -88,7 +88,7 @@
 
 % ─── TITRE ───────────────────────────────────────────────────────────────────
 \begin{center}
-  {\Large\bfseries\color{bleutexte} Corrigé — Épreuve de synthèse Mathématiques}\\[4pt]
+  {\Large\bfseries\color{bleutexte} Corrigé - Épreuve de synthèse Mathématiques}\\[4pt]
   {\large Fonctions de plusieurs variables, Opérateurs vectoriels \& Équations différentielles}\\[6pt]
   {\small\itshape
     Pour chaque question : la réponse correcte, la méthode complète et les pièges à éviter.}
@@ -136,7 +136,7 @@ Q30 & Calcul & $8$                                    \\
 \end{notebox}
 
 % ═══════════════════════════════════════════════════════════════════════════════
-\section{Partie 1 - Fonctions de plusieurs variables — définitions fondamentales}
+\section{Partie 1 - Fonctions de plusieurs variables - définitions fondamentales}
 % ═══════════════════════════════════════════════════════════════════════════════
 
 %────── Q1 ────────────────────────────────────────────────────────────────────
@@ -170,9 +170,9 @@ $$f \text{ continue en } a \;\Longleftrightarrow\; \lim_{(x,y)\to a} f(x,y) = f(
 \begin{methodebox}
 \textbf{Trois représentations d'une surface :}
 \begin{itemize}[itemsep=1pt, topsep=2pt]
-  \item \textbf{Explicite :} $z = f(x,y)$ — la surface est le graphe de $f$.
-  \item \textbf{Implicite :} $F(x,y,z) = 0$ — ensemble de niveau d'une fonction de 3 variables.
-  \item \textbf{Paramétrique :} $(u,v)\mapsto\mathbf{r}(u,v)$ — deux paramètres décrivent la surface.
+  \item \textbf{Explicite :} $z = f(x,y)$ - la surface est le graphe de $f$.
+  \item \textbf{Implicite :} $F(x,y,z) = 0$ - ensemble de niveau d'une fonction de 3 variables.
+  \item \textbf{Paramétrique :} $(u,v)\mapsto\mathbf{r}(u,v)$ - deux paramètres décrivent la surface.
 \end{itemize}
 La forme A, $\mathbf{r}(t)$, est un paramétrage de \emph{courbe} (une seule variable).
 \end{methodebox}
@@ -192,7 +192,7 @@ La forme A, $\mathbf{r}(t)$, est un paramétrage de \emph{courbe} (une seule var
 \begin{itemize}[leftmargin=1.5em, itemsep=2pt]
   \item \textcolor{rougeerr}{\textbf{A)}} La différentielle totale $df$ fait intervenir les deux dérivées partielles.
   \item \textcolor{rougeerr}{\textbf{B)}} Le taux de variation dans \emph{toutes les directions} est la dérivée directionnelle, pas $\partial_x f$.
-  \item \textcolor{vertok}{\textbf{C)}} Définition correcte — $y$ est fixé, seul $x$ varie. \textbf{Correct.}
+  \item \textcolor{vertok}{\textbf{C)}} Définition correcte - $y$ est fixé, seul $x$ varie. \textbf{Correct.}
   \item \textcolor{rougeerr}{\textbf{D)}} Cette description correspond à $\dfrac{\partial f}{\partial y}(a,b)$.
 \end{itemize}
 
@@ -353,7 +353,7 @@ $$\frac{\partial^2 f}{\partial y\partial x} = \frac{\partial}{\partial x}\bigl(x
 \end{reponsebox}
 
 % ═══════════════════════════════════════════════════════════════════════════════
-\section{Partie 3 - Opérateurs vectoriels — gradient, divergence, rotationnel}
+\section{Partie 3 - Opérateurs vectoriels - gradient, divergence, rotationnel}
 % ═══════════════════════════════════════════════════════════════════════════════
 
 %────── Q13 ────────────────────────────────────────────────────────────────────
@@ -445,7 +445,7 @@ $$\text{div}\,\mathbf{F} = \frac{\partial(x^2)}{\partial x} + \frac{\partial(yz)
 \end{reponsebox}
 
 % ═══════════════════════════════════════════════════════════════════════════════
-\section{Partie 4 - Équations différentielles — rappels de cours}
+\section{Partie 4 - Équations différentielles - rappels de cours}
 % ═══════════════════════════════════════════════════════════════════════════════
 
 %────── Q19 ────────────────────────────────────────────────────────────────────
@@ -639,10 +639,10 @@ Ici $xy = x \cdot y$, donc $\displaystyle\iint_D xy\,dA = \int_0^1 x\,dx \cdot \
 \qenonce{Calculer $\displaystyle\int_0^2\!\int_0^2 (x+y)\,dy\,dx$.}
 
 \begin{reponsebox}
-\textbf{Étape 1 — intégration sur $y$ (intégrale intérieure) :}
+\textbf{Étape 1 - intégration sur $y$ (intégrale intérieure) :}
 $$\int_0^2(x+y)\,dy = \Bigl[xy+\frac{y^2}{2}\Bigr]_0^2 = \bigl(2x + 2\bigr) - 0 = 2x + 2$$
 
-\textbf{Étape 2 — intégration sur $x$ (intégrale extérieure) :}
+\textbf{Étape 2 - intégration sur $x$ (intégrale extérieure) :}
 $$\int_0^2(2x+2)\,dx = \Bigl[x^2+2x\Bigr]_0^2 = (4 + 4) - 0 = \boxed{8}$$
 \end{reponsebox}
 
@@ -652,7 +652,7 @@ $$\int_0^2(2x+2)\,dx = \Bigl[x^2+2x\Bigr]_0^2 = (4 + 4) - 0 = \boxed{8}$$
 % ═══════════════════════════════════════════════════════════════════════════════
 
 \begin{methodebox}
-\textbf{Fonctions de plusieurs variables — Récapitulatif}
+\textbf{Fonctions de plusieurs variables - Récapitulatif}
 \begin{enumerate}[itemsep=2pt, topsep=2pt]
   \item Continuité en $a$ : $\lim_{(x,y)\to a}f(x,y) = f(a)$. Différentiable $\Rightarrow$ continu (réciproque fausse).
   \item Dérivée partielle $\partial_x f$ : dériver $f$ en ne faisant varier que $x$, $y$ fixé.
@@ -666,7 +666,7 @@ $$\int_0^2(2x+2)\,dx = \Bigl[x^2+2x\Bigr]_0^2 = (4 + 4) - 0 = \boxed{8}$$
 \vspace{6pt}
 
 \begin{methodebox}
-\textbf{Opérateurs vectoriels — Récapitulatif}
+\textbf{Opérateurs vectoriels - Récapitulatif}
 \begin{center}
 \begin{tabular}{@{}llll@{}}
 \toprule
@@ -685,7 +685,7 @@ Laplacien  & $\Delta f$               & $\partial^2_{xx} f + \partial^2_{yy} f +
 \vspace{6pt}
 
 \begin{methodebox}
-\textbf{Équations différentielles — Récapitulatif}
+\textbf{Équations différentielles - Récapitulatif}
 \begin{center}
 \begin{tabular}{@{}lll@{}}
 \toprule
@@ -702,7 +702,7 @@ Complexes $\alpha \pm \beta i$   & $\Delta < 0$ & $e^{\alpha x}(C_1\cos\beta x +
 \vspace{6pt}
 
 \begin{methodebox}
-\textbf{Extrema — Classification des points critiques}
+\textbf{Extrema - Classification des points critiques}
 
 En un point critique ($\nabla f = \mathbf{0}$), calculer $H = f_{xx}\,f_{yy} - f_{xy}^2$ :
 \begin{center}
