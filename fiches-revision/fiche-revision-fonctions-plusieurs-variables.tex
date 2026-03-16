@@ -1,0 +1,143 @@
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{parskip}
+
+\geometry{top=1.8cm, bottom=2cm, left=1.8cm, right=1.8cm}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textit{Mathématiques, fiche de révision}}
+\fancyhead[R]{\small\textit{Fonctions de plusieurs variables}}
+\fancyfoot[C]{\small\thepage}
+\fancyfoot[R]{\tiny\textcopyright\ Rohan Fossé}
+\renewcommand{\headrulewidth}{0.3pt}
+
+\definecolor{bleu}{RGB}{30,60,120}
+\definecolor{vert}{RGB}{0,110,60}
+\definecolor{rouge}{RGB}{160,20,20}
+\definecolor{gris}{gray}{0.93}
+\definecolor{jauneclair}{RGB}{255,250,220}
+\definecolor{vertclair}{RGB}{220,245,220}
+
+\newmdenv[backgroundcolor=gris, linewidth=0pt,
+  innerleftmargin=8pt, innerrightmargin=8pt,
+  innertopmargin=5pt, innerbottommargin=5pt,
+  skipabove=4pt, skipbelow=4pt]{grisbox}
+
+\newmdenv[backgroundcolor=jauneclair, linecolor=rouge, linewidth=1pt,
+  innerleftmargin=8pt, innerrightmargin=8pt,
+  innertopmargin=5pt, innerbottommargin=5pt,
+  skipabove=4pt, skipbelow=4pt]{alertbox}
+
+\titleformat{\section}[block]{\normalsize\bfseries\color{bleu}}{}{0pt}{}[\vspace{-3pt}\rule{\linewidth}{0.5pt}]
+\titlespacing{\section}{0pt}{10pt}{4pt}
+
+\titleformat{\subsection}[runin]{\small\bfseries\color{vert}}{}{0pt}{}[\ :]
+\titlespacing{\subsection}{0pt}{4pt}{0pt}
+
+\begin{document}
+
+\begin{center}
+  {\Large\bfseries\color{bleu} Fiche de révision : Fonctions de plusieurs variables}\\[3pt]
+  {\small Continuité · Différentielle · Dérivées partielles · Plan tangent · Extrema}
+\end{center}
+\noindent\rule{\linewidth}{0.8pt}
+
+\begin{multicols}{2}
+
+\section{Continuité}
+
+\begin{grisbox}
+\textbf{Définition.} $f:\mathbb{R}^2\to\mathbb{R}$ est \textbf{continue en $a=(a_1,a_2)$} si :
+$$\lim_{(x,y)\to a} f(x,y) = f(a)$$
+\end{grisbox}
+
+\begin{alertbox}
+\textbf{Attention !} L'existence des dérivées partielles ne suffit \textit{pas} à garantir la continuité (ni la différentiabilité).
+\end{alertbox}
+
+\textbf{Tester la non-existence d'une limite} : tester deux chemins différents aboutissant à des valeurs distinctes.
+
+\section{Dérivées partielles}
+
+\begin{grisbox}
+\textbf{Définition.}
+$$\frac{\partial f}{\partial x}(a,b) = \lim_{h\to 0}\frac{f(a+h,b)-f(a,b)}{h}$$
+On dérive par rapport à $x$ en traitant $y$ comme une \textbf{constante}.
+\end{grisbox}
+
+\subsection{Règle de la chaîne}
+Si $f(x,y)=g(h(x,y))$, alors :
+$$\frac{\partial f}{\partial x} = g'(h)\cdot\frac{\partial h}{\partial x}$$
+
+\subsection{Théorème de Schwartz}
+Si $f\in\mathcal{C}^2$, alors les dérivées croisées sont égales :
+$$\boxed{\frac{\partial^2 f}{\partial x\partial y} = \frac{\partial^2 f}{\partial y\partial x}}$$
+
+\section{Différentielle totale}
+
+\begin{grisbox}
+\textbf{Définition.} Si $f$ est différentiable en $(a,b)$ :
+$$df = \frac{\partial f}{\partial x}\,dx + \frac{\partial f}{\partial y}\,dy$$
+La différentiabilité \textbf{implique la continuité}.
+\end{grisbox}
+
+\section{Plan tangent}
+
+\begin{grisbox}
+\textbf{Surface $z=f(x,y)$} au point $(a,b,f(a,b))$ :
+$$\boxed{z = f(a,b) + \frac{\partial f}{\partial x}(a,b)(x-a) + \frac{\partial f}{\partial y}(a,b)(y-b)}$$
+
+\textbf{Surface implicite $F(x,y,z)=0$} au point $M_0$ :
+$$\nabla F(M_0)\cdot(x-x_0,y-y_0,z-z_0)=0$$
+Le vecteur normal est $\nabla F(M_0)$.
+\end{grisbox}
+
+\section{Extrema locaux}
+
+\begin{grisbox}
+\textbf{Étape 1 -- Points critiques :} résoudre $\nabla f = \mathbf{0}$
+$$\frac{\partial f}{\partial x}=0 \quad \text{et} \quad \frac{\partial f}{\partial y}=0$$
+
+\textbf{Étape 2 -- Discriminant hessien :}
+$$H = f_{xx}\,f_{yy} - (f_{xy})^2$$
+
+\textbf{Étape 3 -- Conclusion :}
+\begin{itemize}[leftmargin=1em,itemsep=1pt]
+  \item $H > 0$ et $f_{xx}>0$ : \textbf{minimum local}
+  \item $H > 0$ et $f_{xx}<0$ : \textbf{maximum local}
+  \item $H < 0$ : \textbf{point selle} (col)
+  \item $H = 0$ : pas de conclusion
+\end{itemize}
+\end{grisbox}
+
+\section{À retenir absolument}
+
+\begin{grisbox}
+\begin{itemize}[leftmargin=1em,itemsep=2pt]
+  \item \textbf{Continuité} : $\lim = f(a)$
+  \item \textbf{$\partial f/\partial x$} : dériver en $x$, $y$ constant
+  \item \textbf{Schwartz} : $f_{xy}=f_{yx}$ si $f\in\mathcal{C}^2$
+  \item \textbf{Différentielle} implique continuité
+  \item \textbf{Plan tangent} : formule DL d'ordre 1
+  \item \textbf{Point critique} : $\nabla f=\mathbf{0}$
+  \item \textbf{Nature} : signe de $H$ et $f_{xx}$
+\end{itemize}
+\end{grisbox}
+
+\end{multicols}
+
+\end{document}

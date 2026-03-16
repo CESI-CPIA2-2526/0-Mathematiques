@@ -1,0 +1,627 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{parskip}
+
+\geometry{top=2cm, bottom=2.5cm, left=2.2cm, right=2.2cm}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textit{Mathématiques - Corrigé pédagogique}}
+\fancyhead[R]{\small\textit{Équations différentielles \& Intégrales multiples}}
+\fancyfoot[C]{\small Page \thepage\ / \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Couleurs
+\definecolor{grisbox}{gray}{0.94}
+\definecolor{bleutexte}{RGB}{30,60,120}
+\definecolor{vertok}{RGB}{0,120,60}
+\definecolor{rougeerr}{RGB}{180,30,30}
+\definecolor{orangeinfo}{RGB}{200,100,0}
+\definecolor{bleuclair}{RGB}{220,230,245}
+\definecolor{vertclair}{RGB}{220,245,230}
+\definecolor{orangeclair}{RGB}{255,240,220}
+
+% Environnements colorés
+\newmdenv[backgroundcolor=vertclair, linecolor=vertok, linewidth=1pt,
+          innerleftmargin=10pt, innerrightmargin=10pt,
+          innertopmargin=6pt, innerbottommargin=6pt,
+          skipabove=4pt, skipbelow=6pt]{reponsebox}
+
+\newmdenv[backgroundcolor=bleuclair, linecolor=bleutexte, linewidth=1pt,
+          innerleftmargin=10pt, innerrightmargin=10pt,
+          innertopmargin=6pt, innerbottommargin=6pt,
+          skipabove=4pt, skipbelow=4pt]{methodebox}
+
+\newmdenv[backgroundcolor=orangeclair, linecolor=orangeinfo, linewidth=1pt,
+          innerleftmargin=10pt, innerrightmargin=10pt,
+          innertopmargin=6pt, innerbottommargin=6pt,
+          skipabove=4pt, skipbelow=6pt]{piegebox}
+
+\newmdenv[backgroundcolor=grisbox, linewidth=0pt,
+          innerleftmargin=10pt, innerrightmargin=10pt,
+          innertopmargin=6pt, innerbottommargin=6pt,
+          skipabove=6pt, skipbelow=6pt]{notebox}
+
+% Style des sections
+\usepackage{titlesec}
+\titleformat{\section}[block]{\large\bfseries\color{bleutexte}}{}{0pt}{}[\vspace{-4pt}\rule{\linewidth}{0.4pt}]
+\titlespacing{\section}{0pt}{16pt}{8pt}
+
+% En-tête de question
+\newcounter{qnum}
+\newcommand{\qtitre}[2]{%
+  \stepcounter{qnum}%
+  \medskip\noindent
+  \textbf{\color{bleutexte}Question \theqnum}\enspace
+  \textit{(#1)}\enspace
+  \textcolor{vertok}{\textbf{$\Rightarrow$ Réponse : #2}}
+  \par\smallskip
+}
+
+% Énoncé de la question (affiché en encadré gris clair)
+\newcommand{\qenonce}[1]{%
+  \begin{mdframed}[backgroundcolor=grisbox, linewidth=0pt,
+    innerleftmargin=8pt, innerrightmargin=8pt,
+    innertopmargin=5pt, innerbottommargin=5pt,
+    skipabove=2pt, skipbelow=4pt]
+  \small\textit{#1}
+  \end{mdframed}
+}
+
+\begin{document}
+
+% ─── TITRE ───────────────────────────────────────────────────────────────────
+\begin{center}
+  {\Large\bfseries\color{bleutexte} Corrigé TOMIC Blanc}\\[4pt]
+  {\large Contrôle - Équations différentielles \& Intégrales multiples}\\[6pt]
+  {\small\itshape
+    Pour chaque question : la réponse correcte, la méthode complète et les pièges à éviter.}
+\end{center}
+
+\vspace{2pt}
+\noindent\rule{\linewidth}{0.6pt}
+\vspace{4pt}
+
+% ── Grille de correction ──────────────────────────────────────────────────────
+\begin{notebox}
+\textbf{Grille de correction rapide}\\[4pt]
+\begin{tabular}{@{}lll@{\quad}lll@{\quad}lll@{}}
+Q1  & QCM    & \textbf{B}              &
+Q10 & QCM    & \textbf{A}              &
+Q19 & QCM    & \textbf{A}              \\
+Q2  & QCM    & \textbf{A}              &
+Q11 & QCM    & \textbf{B}              &
+Q20 & QCM    & \textbf{A}              \\
+Q3  & Calcul & $5e^{-2}\approx 0{,}68$ &
+Q12 & QCM    & \textbf{A}              &
+Q21 & Calcul & $9\pi$                  \\
+Q4  & QCM    & \textbf{B}              &
+Q13 & Calcul & $C_1=3,\;C_2=-2$        &
+Q22 & QCM    & \textbf{C}              \\
+Q5  & QCM    & \textbf{B}              &
+Q14 & Calcul & $18$                    &
+Q23 & Calcul & $\dfrac{4\pi}{3}$       \\
+Q6  & QCM    & \textbf{A}              &
+Q15 & QCM    & \textbf{A}              &
+Q24 & QCM    & \textbf{C}              \\
+Q7  & Calcul & $r_1=2,\;r_2=3$         &
+Q16 & Calcul & $1$                     &
+Q25 & Calcul & $\bar{x}=1$             \\
+Q8  & QCM    & \textbf{C}              &
+Q17 & QCM    & \textbf{B}              \\
+Q9  & QCM    & \textbf{C}              &
+Q18 & Calcul & $18\pi$                 \\
+\end{tabular}
+\end{notebox}
+
+% ═══════════════════════════════════════════════════════════════════════════════
+\section{Partie 1 - Équations différentielles du 1\textsuperscript{er} ordre}
+% ═══════════════════════════════════════════════════════════════════════════════
+
+%────── Q1 ────────────────────────────────────────────────────────────────────
+\qtitre{QCM}{B - $y' + 3y = e^x$}
+\qenonce{Laquelle de ces équations est une EDO linéaire du 1\ier{} ordre ?
+\quad A)~$y'' + 2y = 0$ \quad B)~$y' + 3y = e^x$ \quad C)~$y \cdot y' = x$ \quad D)~$(y')^2 = y$}
+
+\begin{methodebox}
+\textbf{Rappel.} Une EDO est \emph{linéaire du 1\ier{} ordre} si elle s'écrit $y' + p(x)\,y = q(x)$.
+Les termes $y$ et $y'$ doivent apparaître à la \textbf{puissance 1}, sans produit entre eux.
+\end{methodebox}
+
+\begin{itemize}[leftmargin=1.5em, itemsep=2pt]
+  \item \textcolor{rougeerr}{\textbf{A)}} $y'' + 2y = 0$ - présence de $y''$ : c'est une EDO du \textbf{2\ieme{} ordre}.
+  \item \textcolor{vertok}{\textbf{B)}} $y' + 3y = e^x$ - forme standard avec $p = 3$, $q = e^x$. \textbf{Correct.}
+  \item \textcolor{rougeerr}{\textbf{C)}} $y \cdot y' = x$ - produit $y \times y'$ : \textbf{non linéaire}.
+  \item \textcolor{rougeerr}{\textbf{D)}} $(y')^2 = y$ - $y'$ au carré : \textbf{non linéaire}.
+\end{itemize}
+
+%────── Q2 ────────────────────────────────────────────────────────────────────
+\qtitre{QCM}{A - $y = Ce^{4x}$}
+\qenonce{La solution générale de $y' - 4y = 0$ est :
+\quad A)~$y = Ce^{4x}$ \quad B)~$y = Ce^{-4x}$ \quad C)~$y = 4x + C$ \quad D)~$y = C\cos(4x)$}
+
+\begin{methodebox}
+\textbf{Méthode.} Pour $y' - 4y = 0$, on cherche $y = e^{rx}$.
+En substituant : $re^{rx} - 4e^{rx} = 0 \Rightarrow r = 4$.
+Solution générale : $y = Ce^{4x}$.
+\end{methodebox}
+
+\textbf{Vérification :} $y' = 4Ce^{4x}$, donc $y' - 4y = 4Ce^{4x} - 4Ce^{4x} = 0$ \checkmark
+
+%────── Q3 (Calcul) ───────────────────────────────────────────────────────────
+\qtitre{Calcul}{$y(x) = 5e^{-2x}$\quad et\quad $y(1) \approx 0{,}68$}
+\qenonce{On résout $y' + 2y = 0$ avec la condition initiale $y(0) = 5$. Donner $y(x)$ puis calculer $y(1)$ (valeur approchée à $10^{-2}$).}
+
+\begin{reponsebox}
+\textbf{Résolution de $y' + 2y = 0$, $y(0) = 5$}
+
+\smallskip\textbf{Étape 1 - Type d'équation.}
+EDO linéaire du 1\ier{} ordre homogène (second membre nul).
+
+\smallskip\textbf{Étape 2 - Solution générale.}
+Équation caractéristique : $r + 2 = 0 \Rightarrow r = -2$.
+$$y(x) = Ce^{-2x}$$
+
+\smallskip\textbf{Étape 3 - Condition initiale.}
+$y(0) = Ce^{0} = C = 5$.
+$$\boxed{y(x) = 5e^{-2x}}$$
+
+\smallskip\textbf{Étape 4 - Valeur numérique.}
+$$y(1) = 5e^{-2} = \frac{5}{e^2} \approx \frac{5}{7{,}389} \approx \mathbf{0{,}68}$$
+\end{reponsebox}
+
+\begin{piegebox}
+\textbf{Piège fréquent.} $y' + 2y = 0$ donne $r = -2$, donc la solution \emph{décroît} vers 0. Ne pas écrire $Ce^{+2x}$ : cela croîtrait, et contredirait $y(0) = 5 > 0$ avec $y \to 0$.
+\end{piegebox}
+
+%────── Q4 ────────────────────────────────────────────────────────────────────
+\qtitre{QCM}{B - Poser $y = C(x)\cdot y_h$}
+\qenonce{La méthode de variation de la constante pour $y' + p(x)y = q(x)$ consiste à :
+\quad A)~Chercher $y_p = A\cdot q(x)$ \quad B)~Poser $y = C(x)\cdot y_h$ \quad C)~Dériver l'équation \quad D)~Intégrer directement}
+
+\begin{methodebox}
+\textbf{Variation de la constante.} Pour résoudre $y' + p(x)y = q(x)$ :
+\begin{enumerate}[itemsep=1pt, topsep=2pt]
+  \item Résoudre l'homogène : $y_h = e^{-\int p\,dx}$.
+  \item Poser $y = C(x)\cdot y_h$ (on remplace la constante $C$ par une \emph{fonction} $C(x)$).
+  \item Dériver (règle du produit), substituer dans l'équation.
+  \item Il ne reste que $C'(x)$ à intégrer.
+\end{enumerate}
+\end{methodebox}
+
+Les propositions A, C, D sont des méthodes incorrectes. Seule la B décrit le principe de la variation de la constante.
+
+%────── Q5 ────────────────────────────────────────────────────────────────────
+\qtitre{QCM}{B - $y = Ce^{-x} + \tfrac{1}{3}e^{2x}$}
+\qenonce{La solution générale de $y' + y = e^{2x}$ est de la forme :
+\quad A)~$Ce^{-x}$ \quad B)~$Ce^{-x} + \tfrac{1}{3}e^{2x}$ \quad C)~$Ce^{x} + e^{2x}$ \quad D)~$Ce^{-x} + e^{2x}$}
+
+\begin{methodebox}
+\textbf{Structure.} $y_{\text{gen}} = y_h + y_p$.
+\end{methodebox}
+
+\textbf{Solution homogène :} $y' + y = 0 \Rightarrow r = -1 \Rightarrow y_h = Ce^{-x}$.
+
+\textbf{Solution particulière :} On essaie $y_p = Ae^{2x}$.
+$$y_p' + y_p = 2Ae^{2x} + Ae^{2x} = 3Ae^{2x} = e^{2x} \quad\Rightarrow\quad A = \tfrac{1}{3}$$
+
+$$\boxed{y = Ce^{-x} + \tfrac{1}{3}e^{2x}}$$
+
+\textbf{Pourquoi D est faux :} $y = Ce^{-x} + e^{2x}$ correspondrait à $A = 1$, mais $3\times 1 \neq 1$.
+
+% ═══════════════════════════════════════════════════════════════════════════════
+\section{Partie 2 - Équations différentielles du 2\textsuperscript{e} ordre}
+% ═══════════════════════════════════════════════════════════════════════════════
+
+%────── Q6 ────────────────────────────────────────────────────────────────────
+\qtitre{QCM}{A - $r^2 - 5r + 6 = 0$}
+\qenonce{L'équation caractéristique de $y'' - 5y' + 6y = 0$ est :
+\quad A)~$r^2-5r+6=0$ \quad B)~$r^2+5r+6=0$ \quad C)~$r-5+6=0$ \quad D)~$r^2-5r=0$}
+
+\begin{methodebox}
+\textbf{Équation caractéristique.} Pour $ay'' + by' + cy = 0$, on substitue $y'' \to r^2$, $y' \to r$, $y \to 1$ :
+$$ar^2 + br + c = 0$$
+\end{methodebox}
+
+Pour $y'' - 5y' + 6y = 0$ : $r^2 - 5r + 6 = 0$. Les autres propositions résultent d'erreurs de signe ou d'oubli de $r^2$.
+
+%────── Q7 (Calcul) ───────────────────────────────────────────────────────────
+\qtitre{Calcul}{$r_1 = 2$,\quad $r_2 = 3$}
+\qenonce{Résoudre $r^2 - 5r + 6 = 0$. Donner les valeurs de $r_1$ et $r_2$.}
+
+\begin{reponsebox}
+\textbf{Résolution de $r^2 - 5r + 6 = 0$}
+
+\textbf{Discriminant :} $\Delta = (-5)^2 - 4\times 1\times 6 = 25 - 24 = 1 > 0$.
+$$r = \frac{5 \pm \sqrt{1}}{2} = \frac{5 \pm 1}{2} \qquad\Rightarrow\qquad \boxed{r_1 = 2,\quad r_2 = 3}$$
+
+\textbf{Factorisation :} $r^2 - 5r + 6 = (r-2)(r-3)$. On cherche deux nombres de somme 5 et de produit 6.
+
+\textbf{Interprétation :} $\Delta > 0$ $\Rightarrow$ deux racines réelles et distinctes $\Rightarrow$ régime \emph{apériodique}.
+\end{reponsebox}
+
+%────── Q8 ────────────────────────────────────────────────────────────────────
+\qtitre{QCM}{C - $y = C_1e^{2x} + C_2e^{3x}$}
+\qenonce{D'après vos résultats (Q7), la solution générale de $y'' - 5y' + 6y = 0$ est :
+\quad A)~$C_1e^{5x}+C_2e^{6x}$ \quad B)~$(C_1+C_2x)e^{3x}$ \quad C)~$C_1e^{2x}+C_2e^{3x}$ \quad D)~$e^x(C_1\cos2x+C_2\sin3x)$}
+
+\begin{methodebox}
+\textbf{Cas $\Delta > 0$ : deux racines réelles $r_1 \neq r_2$.}
+$$y_h = C_1\,e^{r_1 x} + C_2\,e^{r_2 x}$$
+Les deux fonctions sont linéairement indépendantes (Wronskien non nul).
+\end{methodebox}
+
+Avec $r_1 = 2$, $r_2 = 3$ : $y = C_1e^{2x} + C_2e^{3x}$. La proposition D (fonctions trigo) est réservée aux racines \emph{complexes}.
+
+%────── Q9 ────────────────────────────────────────────────────────────────────
+\qtitre{QCM}{C - Complexes conjuguées $-1 \pm 2i$}
+\qenonce{$y'' + 2y' + 5y = 0$ a pour discriminant $\Delta = -16$. Les racines sont :
+\quad A)~Réelles distinctes \quad B)~Réelles égales \quad C)~Complexes $-1\pm 2i$ \quad D)~Complexes $1\pm 2i$}
+
+\begin{methodebox}
+\textbf{Cas $\Delta < 0$ : racines complexes.}
+$$\alpha = \frac{-b}{2a},\qquad \beta = \frac{\sqrt{|\Delta|}}{2a},\qquad r = \alpha \pm i\beta$$
+\end{methodebox}
+
+Pour $r^2 + 2r + 5 = 0$ : $\Delta = 4 - 20 = -16$.
+$$\alpha = \frac{-2}{2} = -1,\qquad \beta = \frac{\sqrt{16}}{2} = 2 \qquad\Rightarrow\qquad \boxed{r = -1 \pm 2i}$$
+
+\textbf{Pourquoi D est faux :} $-1 \pm 2i$ a partie réelle $-1$, pas $+1$.
+
+%────── Q10 ────────────────────────────────────────────────────────────────────
+\qtitre{QCM}{A - $y = e^{-x}(C_1\cos 2x + C_2\sin 2x)$}
+\qenonce{La solution générale de $y'' + 2y' + 5y = 0$ est :
+\quad A)~$e^{-x}(C_1\cos2x+C_2\sin2x)$ \quad B)~$e^{x}(C_1\cos2x+C_2\sin2x)$ \quad C)~$(C_1+C_2x)e^{-x}$ \quad D)~$C_1e^{-x}+C_2e^{5x}$}
+
+\begin{methodebox}
+\textbf{Cas $\Delta < 0$ : racines $\alpha \pm i\beta$.}
+$$y_h = e^{\alpha x}\bigl(C_1\cos(\beta x) + C_2\sin(\beta x)\bigr)$$
+Si $\alpha < 0$ : oscillations \emph{amorties} (amplitude décroît). Si $\alpha = 0$ : oscillations pures.
+\end{methodebox}
+
+Avec $\alpha = -1$, $\beta = 2$ : $y = e^{-x}(C_1\cos 2x + C_2\sin 2x)$.
+
+\begin{piegebox}
+\textbf{Piège.} La proposition C, $(C_1 + C_2x)e^{-x}$, correspond au cas \emph{racine double} ($\Delta = 0$). Bien distinguer les trois régimes selon le signe de $\Delta$.
+\end{piegebox}
+
+%────── Q11 ────────────────────────────────────────────────────────────────────
+\qtitre{QCM}{B - $e^{2x}$ est déjà solution de l'équation homogène}
+\qenonce{Pour $y'' - 4y = e^{2x}$, la forme $y_p = Ae^{2x}$ ne fonctionne pas car :
+\quad A)~$e^{2x}$ croît trop vite \quad B)~$e^{2x}$ est solution homogène \quad C)~Le 2\ieme membre n'est pas polynomial \quad D)~L'équation est du 2\ieme ordre}
+
+\begin{methodebox}
+\textbf{Règle de résonance.} Si la forme $y_p$ proposée est solution de l'homogène, elle est absorbée par $y_h$ et ne peut satisfaire l'équation complète. On la multiplie par $x$ (ou $x^2$ si racine double).
+\end{methodebox}
+
+Pour $y'' - 4y = e^{2x}$ : homogène $r^2 - 4 = 0$, racines $r = \pm 2$. Comme $r = 2$ est racine, $e^{2x}$ est solution homogène.
+
+Bonne forme : $y_p = Axe^{2x}$.
+
+%────── Q12 ────────────────────────────────────────────────────────────────────
+\qtitre{QCM}{A - $C_1+C_2=1$ et $2C_1+3C_2=0$}
+\qenonce{On applique $y(0)=1$, $y'(0)=0$ à $y = C_1e^{2x}+C_2e^{3x}$. Le système obtenu est :
+\quad A)~$C_1+C_2=1$ et $2C_1+3C_2=0$ \quad B)~$C_1+C_2=0$ et $2C_1+3C_2=1$ \quad C)~$C_1C_2=1$ et $C_1+C_2=0$ \quad D)~$2C_1+3C_2=1$ et $C_1=C_2$}
+
+\begin{methodebox}
+\textbf{Application des conditions initiales.}
+On évalue $y(0)$ et $y'(0)$, puis on égalise aux valeurs imposées.
+\end{methodebox}
+
+Avec $y = C_1e^{2x} + C_2e^{3x}$ :
+\begin{align*}
+y(0)  &= C_1 + C_2 = 1\\
+y'(x) &= 2C_1e^{2x} + 3C_2e^{3x}\\
+y'(0) &= 2C_1 + 3C_2 = 0
+\end{align*}
+
+%────── Q13 (Calcul) ──────────────────────────────────────────────────────────
+\qtitre{Calcul}{$C_1 = 3$,\quad $C_2 = -2$}
+\qenonce{Résoudre le système de la question précédente. Donner les valeurs de $C_1$ et $C_2$.}
+
+\begin{reponsebox}
+\textbf{Résolution de $\begin{cases}C_1+C_2 = 1\\ 2C_1+3C_2 = 0\end{cases}$}
+
+\textbf{Substitution :} De (1) : $C_1 = 1 - C_2$. Dans (2) :
+$$2(1 - C_2) + 3C_2 = 0 \quad\Rightarrow\quad 2 + C_2 = 0 \quad\Rightarrow\quad \boxed{C_2 = -2}$$
+Puis $C_1 = 1 - (-2) = \boxed{3}$.
+
+\textbf{Vérification :} $3 + (-2) = 1$ \checkmark \quad et \quad $2\times 3 + 3\times(-2) = 6 - 6 = 0$ \checkmark
+
+\textbf{Solution complète :} $y(x) = 3e^{2x} - 2e^{3x}$
+\end{reponsebox}
+
+% ═══════════════════════════════════════════════════════════════════════════════
+\section{Partie 3 - Intégrales doubles}
+% ═══════════════════════════════════════════════════════════════════════════════
+
+%────── Q14 (Calcul) ──────────────────────────────────────────────────────────
+\qtitre{Calcul}{$\displaystyle\int_0^2\!\int_0^3(x+y)\,dy\,dx = 18$}
+\qenonce{Calculer $\displaystyle\int_0^2\!\int_0^3 (x+y)\,dy\,dx$.}
+
+\begin{reponsebox}
+\textbf{Application du théorème de Fubini - on intègre d'abord en $y$.}
+
+\textbf{Étape 1 - Intégrale intérieure en $y$ ($x$ fixé) :}
+$$\int_0^3 (x+y)\,dy = \Bigl[xy + \frac{y^2}{2}\Bigr]_0^3 = 3x + \frac{9}{2}$$
+
+\textbf{Étape 2 - Intégrale extérieure en $x$ :}
+$$\int_0^2 \Bigl(3x + \frac{9}{2}\Bigr)\,dx = \Bigl[\frac{3x^2}{2} + \frac{9x}{2}\Bigr]_0^2 = 6 + 9 = \boxed{18}$$
+\end{reponsebox}
+
+\begin{piegebox}
+\textbf{Piège.} Lors de l'intégration en $y$, $x$ est une \emph{constante}. L'intégrale de $x$ par rapport à $y$ donne $xy$ (pas $x^2/2$).
+\end{piegebox}
+
+%────── Q15 ────────────────────────────────────────────────────────────────────
+\qtitre{QCM}{A - $\int_0^1 x\,dx \cdot \int_0^2 y\,dy$}
+\qenonce{On calcule $\iint_D xy\,dA$ sur $D=[0,1]\times[0,2]$. Par séparation de Fubini :
+\quad A)~$\int_0^1 x\,dx\cdot\int_0^2 y\,dy$ \quad B)~$\int_0^1\int_0^2(x+y)\,dy\,dx$ \quad C)~$\bigl(\int_0^1 xy\,dx\bigr)^2$ \quad D)~$\int_0^2\int_0^1 xy\,dx\,dy$}
+
+\begin{methodebox}
+\textbf{Séparation (Fubini).} Si $f(x,y) = g(x)\cdot h(y)$ et $D = [a,b]\times[c,d]$ :
+$$\iint_D f\,dA = \Bigl(\int_a^b g(x)\,dx\Bigr)\Bigl(\int_c^d h(y)\,dy\Bigr)$$
+\end{methodebox}
+
+$f(x,y) = xy = x \cdot y$ est séparable. Sur $[0,1]\times[0,2]$ :
+$$\iint_D xy\,dA = \int_0^1 x\,dx \cdot \int_0^2 y\,dy$$
+
+\textbf{Remarque :} la proposition D est aussi correcte (Fubini classique) mais n'exploite pas la séparabilité.
+
+%────── Q16 (Calcul) ──────────────────────────────────────────────────────────
+\qtitre{Calcul}{$\displaystyle\iint_D xy\,dA = 1$}
+\qenonce{Calculer l'intégrale de la question précédente : $\displaystyle\iint_D xy\,dA$ sur $D=[0,1]\times[0,2]$.}
+
+\begin{reponsebox}
+$$\int_0^1 x\,dx = \Bigl[\frac{x^2}{2}\Bigr]_0^1 = \frac{1}{2}
+\qquad\qquad
+\int_0^2 y\,dy = \Bigl[\frac{y^2}{2}\Bigr]_0^2 = 2$$
+
+$$\Rightarrow\quad \iint_D xy\,dA = \frac{1}{2}\times 2 = \boxed{1}$$
+\end{reponsebox}
+
+%────── Q17 ────────────────────────────────────────────────────────────────────
+\qtitre{QCM}{B - Coordonnées polaires}
+\qenonce{Pour $\iint_D\sqrt{x^2+y^2}\,dA$ sur le disque $x^2+y^2\leq 9$, le meilleur changement de variables est :
+\quad A)~$x=u+v$, $y=u-v$ \quad B)~Coordonnées polaires \quad C)~$x=r\cosh\theta$, $y=r\sinh\theta$ \quad D)~Aucun changement}
+
+\begin{methodebox}
+\textbf{Coordonnées polaires.} $x = r\cos\theta$,\; $y = r\sin\theta$,\; $dA = r\,dr\,d\theta$.
+
+À utiliser lorsque le domaine est un disque (ou secteur) \emph{et/ou} l'intégrande contient $x^2 + y^2$.
+\end{methodebox}
+
+Ici : domaine circulaire $x^2+y^2\leq 9$, intégrande $\sqrt{x^2+y^2}$. Les polaires s'imposent.
+
+%────── Q18 (Calcul) ──────────────────────────────────────────────────────────
+\qtitre{Calcul}{$\displaystyle\iint_D\sqrt{x^2+y^2}\,dA = 18\pi$}
+\qenonce{Avec les coordonnées polaires, calculer $\iint_D\sqrt{x^2+y^2}\,dA$ sur $x^2+y^2\leq 9$. \textit{Rappel :} $\sqrt{x^2+y^2}=r$, $dA = r\,dr\,d\theta$.}
+
+\begin{reponsebox}
+\textbf{Passage en coordonnées polaires sur $x^2+y^2\leq 9$.}
+
+Bornes : $r \in [0,3]$, $\theta \in [0,2\pi]$. Substitution : $\sqrt{x^2+y^2} = r$, $dA = r\,dr\,d\theta$.
+
+$$\iint_D\sqrt{x^2+y^2}\,dA = \int_0^{2\pi}\!\!d\theta\int_0^3 r\cdot r\,dr = \int_0^{2\pi}\!\!d\theta\int_0^3 r^2\,dr$$
+
+$$= \Bigl[\theta\Bigr]_0^{2\pi}\times\Bigl[\frac{r^3}{3}\Bigr]_0^3 = 2\pi \times \frac{27}{3} = 2\pi \times 9 = \boxed{18\pi}$$
+\end{reponsebox}
+
+\begin{piegebox}
+\textbf{Piège.} Ne pas oublier le jacobien $r$ : en polaires $dA = \mathbf{r}\,dr\,d\theta$. Ici l'intégrande $r$ combiné au jacobien $r$ donne $r^2$.
+\end{piegebox}
+
+%────── Q19 ────────────────────────────────────────────────────────────────────
+\qtitre{QCM}{A - $\int_0^1\int_0^y f(x,y)\,dx\,dy$}
+\qenonce{On inverse l'ordre dans $\int_0^1\int_x^1 f(x,y)\,dy\,dx$. L'intégrale équivalente est :
+\quad A)~$\int_0^1\int_0^y f\,dx\,dy$ \quad B)~$\int_0^1\int_0^1 f\,dx\,dy$ \quad C)~$\int_0^1\int_y^1 f\,dx\,dy$ \quad D)~$\int_0^1\int_0^x f\,dx\,dy$}
+
+\begin{methodebox}
+\textbf{Inversion de l'ordre.} Dessiner le domaine $D$, puis le redécrire avec l'autre variable en premier.
+\end{methodebox}
+
+Domaine initial : $x \in [0,1]$, $y \in [x,1]$ $\Rightarrow$ triangle de sommets $(0,0)$, $(1,0)$, $(1,1)$.
+
+Avec $y$ en variable externe : $y \in [0,1]$, et pour chaque $y$, $x \in [0, y]$ (car $y \geq x$).
+$$\Rightarrow\int_0^1\!\int_0^y f(x,y)\,dx\,dy$$
+
+% ═══════════════════════════════════════════════════════════════════════════════
+\section{Partie 4 - Green-Riemann \& Intégrales triples}
+% ═══════════════════════════════════════════════════════════════════════════════
+
+%────── Q20 ────────────────────────────────────────────────────────────────────
+\qtitre{QCM}{A - Domaine fermé borné à bord régulier orienté positivement}
+\qenonce{La formule de Green-Riemann $\oint_{\partial D} P\,dx+Q\,dy = \iint_D\!\bigl(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\bigr)dA$ s'applique si :
+\quad A)~$D$ fermé borné à bord régulier orienté positivement \quad B)~$f$ continue sur $\mathbb{R}^2$ \quad C)~$P$, $Q$ constantes \quad D)~$D$ est un rectangle}
+
+\begin{methodebox}
+\textbf{Théorème de Green-Riemann :}
+$$\oint_{\partial D} P\,dx + Q\,dy = \iint_D\!\left(\frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y}\right)dA$$
+\textbf{Conditions :} $D$ borné et fermé, $\partial D$ régulier et orienté positivement (sens trigonométrique), $P$ et $Q$ de classe $C^1$ sur $D$.
+\end{methodebox}
+
+La continuité seule (B) est insuffisante. $P$, $Q$ constants (C) est trop restrictif et faux en général. $D$ rectangle (D) n'est pas une condition nécessaire.
+
+%────── Q21 (Calcul) ──────────────────────────────────────────────────────────
+\qtitre{Calcul}{$\mathrm{Aire}(D) = 9\pi$}
+\qenonce{Avec $P=-y$, $Q=x$, calculer l'aire du disque de rayon $R=3$ via Green-Riemann. \textit{Rappel :} $\oint(-y\,dx+x\,dy) = 2\,\mathrm{Aire}(D)$.}
+
+\begin{reponsebox}
+\textbf{Aire du disque de rayon 3 par Green-Riemann avec $P=-y$, $Q=x$.}
+
+\textbf{Vérification de la formule :}
+$$\frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y} = 1-(-1) = 2
+\quad\Rightarrow\quad \oint(-y\,dx + x\,dy) = 2\,\mathrm{Aire}(D)$$
+
+\textbf{Paramétrage de $\partial D$ :} $x = 3\cos t$, $y = 3\sin t$, $t \in [0,2\pi]$.
+$$dx = -3\sin t\,dt,\qquad dy = 3\cos t\,dt$$
+
+\textbf{Calcul :}
+$$\oint(-y\,dx + x\,dy) = \int_0^{2\pi}\bigl(9\sin^2t + 9\cos^2t\bigr)\,dt = \int_0^{2\pi} 9\,dt = 18\pi$$
+
+$$\mathrm{Aire}(D) = \frac{18\pi}{2} = \boxed{9\pi}$$
+
+\textbf{Vérification directe :} $\pi R^2 = \pi \times 3^2 = 9\pi$ \checkmark
+\end{reponsebox}
+
+%────── Q22 ────────────────────────────────────────────────────────────────────
+\qtitre{QCM}{C - $\rho^2\sin\varphi$}
+\qenonce{Le jacobien en coordonnées sphériques $(\rho,\varphi,\theta)$ vaut :
+\quad A)~$\rho^2$ \quad B)~$\rho\sin\varphi$ \quad C)~$\rho^2\sin\varphi$ \quad D)~$\rho^2\cos\varphi$}
+
+\begin{methodebox}
+\textbf{Coordonnées sphériques :}
+$x = \rho\sin\varphi\cos\theta$,\; $y = \rho\sin\varphi\sin\theta$,\; $z = \rho\cos\varphi$,
+
+avec $\rho \geq 0$, $\varphi \in [0,\pi]$ (colatitude), $\theta \in [0,2\pi]$ (longitude).
+
+Jacobien : $dV = \rho^2\sin\varphi\,d\rho\,d\varphi\,d\theta$.
+\end{methodebox}
+
+La proposition A oublie $\sin\varphi$. La proposition D confond $\sin$ et $\cos$. Moyen mnémotechnique : $r^2 \cdot \sin(\text{colatitude})$.
+
+%────── Q23 (Calcul) ──────────────────────────────────────────────────────────
+\qtitre{Calcul}{$V = \dfrac{4\pi}{3}$}
+\qenonce{Calculer le volume de la boule $x^2+y^2+z^2\leq 1$ en coordonnées sphériques. \textit{Rappel :} $\int_0^\pi\sin\varphi\,d\varphi = 2$.}
+
+\begin{reponsebox}
+\textbf{Volume de la boule $x^2+y^2+z^2\leq 1$ en coordonnées sphériques.}
+
+Bornes : $\rho \in [0,1]$, $\varphi \in [0,\pi]$, $\theta \in [0,2\pi]$.
+
+$$V = \int_0^{2\pi}\!\!d\theta \int_0^\pi\!\sin\varphi\,d\varphi \int_0^1\!\rho^2\,d\rho$$
+
+Les trois intégrales sont indépendantes (bornes constantes) :
+
+$$\int_0^{2\pi}\!\!d\theta = 2\pi$$
+
+$$\int_0^\pi\!\sin\varphi\,d\varphi = \bigl[-\cos\varphi\bigr]_0^\pi = -\cos\pi + \cos 0 = 1+1 = 2$$
+
+$$\int_0^1\!\rho^2\,d\rho = \Bigl[\frac{\rho^3}{3}\Bigr]_0^1 = \frac{1}{3}$$
+
+$$\Rightarrow V = 2\pi \times 2 \times \frac{1}{3} = \boxed{\frac{4\pi}{3}}$$
+
+\textbf{Vérification :} formule $V = \tfrac{4}{3}\pi R^3 = \tfrac{4}{3}\pi$ pour $R=1$ \checkmark
+\end{reponsebox}
+
+% ═══════════════════════════════════════════════════════════════════════════════
+\section{Partie 5 - Applications}
+% ═══════════════════════════════════════════════════════════════════════════════
+
+%────── Q24 ────────────────────────────────────────────────────────────────────
+\qtitre{QCM}{C - $\bar{x} = \dfrac{1}{A}\iint_D x\,dA$}
+\qenonce{La coordonnée $\bar{x}$ du centre de gravité d'une surface $D$ d'aire $A$ (densité $\rho=1$) est :
+\quad A)~$\iint_D x^2\,dA$ \quad B)~$A\cdot\iint_D x\,dA$ \quad C)~$\tfrac{1}{A}\iint_D x\,dA$ \quad D)~$\iint_D x\,dA$}
+
+\begin{methodebox}
+\textbf{Centre de gravité d'une surface homogène ($\rho = 1$).}
+$$\bar{x} = \frac{1}{A}\iint_D x\,dA,\qquad \bar{y} = \frac{1}{A}\iint_D y\,dA$$
+C'est la moyenne pondérée de $x$ sur le domaine $D$.
+\end{methodebox}
+
+La proposition D oublie la division par $A$ : sans normalisation, l'intégrale dépend de la taille du domaine, pas seulement de sa position.
+
+%────── Q25 (Calcul) ──────────────────────────────────────────────────────────
+\qtitre{Calcul}{$\bar{x} = 1$}
+\qenonce{Calculer $\bar{x}$ du triangle de sommets $(0,0)$, $(3,0)$, $(0,3)$ (aire $= 9/2$). \textit{Rappel :} $\iint_D x\,dA = \int_0^3\!\int_0^{3-x} x\,dy\,dx$.}
+
+\begin{reponsebox}
+\textbf{Centre de gravité du triangle de sommets $(0,0)$, $(3,0)$, $(0,3)$.}
+
+\textbf{Aire :} $A = \tfrac{1}{2}\times 3\times 3 = \tfrac{9}{2}$.
+
+\textbf{Équation du côté oblique :} droite $(3,0)$--$(0,3)$ : $x + y = 3$, soit $y = 3-x$.
+
+\textbf{Calcul de $\iint_D x\,dA$ :}
+$$\int_0^3\!\int_0^{3-x} x\,dy\,dx = \int_0^3 x(3-x)\,dx = \int_0^3 (3x - x^2)\,dx$$
+$$= \Bigl[\frac{3x^2}{2} - \frac{x^3}{3}\Bigr]_0^3 = \frac{27}{2} - \frac{27}{3} = \frac{27}{2} - 9 = \frac{9}{2}$$
+
+\textbf{Centre de gravité :}
+$$\bar{x} = \frac{\iint_D x\,dA}{A} = \frac{9/2}{9/2} = \boxed{1}$$
+
+\textbf{Vérification géométrique :} Pour un triangle de sommets $(x_i, y_i)$, le barycentre est
+$\bar{x} = \tfrac{x_1+x_2+x_3}{3} = \tfrac{0+3+0}{3} = 1$ \checkmark
+\end{reponsebox}
+
+% ═══════════════════════════════════════════════════════════════════════════════
+\newpage
+\section*{\color{bleutexte}Synthèse des méthodes à retenir}
+% ═══════════════════════════════════════════════════════════════════════════════
+
+\begin{methodebox}
+\textbf{EDO du 1\textsuperscript{er} ordre - Procédure}
+\begin{enumerate}[itemsep=2pt, topsep=2pt]
+  \item Identifier : homogène ($q=0$) ou avec second membre ($q\neq 0$)
+  \item Homogène : $y' + ay = 0 \;\Rightarrow\; r = -a \;\Rightarrow\; y_h = Ce^{-ax}$
+  \item Particulière : essayer une forme proche du second membre (ansatz) ; si collision avec $y_h$, multiplier par $x$
+  \item $y = y_h + y_p$, puis conditions initiales pour trouver $C$
+\end{enumerate}
+\end{methodebox}
+
+\vspace{6pt}
+
+\begin{methodebox}
+\textbf{EDO du 2\textsuperscript{e} ordre - Trois régimes}
+
+Équation caractéristique $r^2 + br + c = 0$, discriminant $\Delta = b^2 - 4c$ :
+
+\vspace{4pt}
+\begin{center}
+\begin{tabular}{@{}llll@{}}
+\toprule
+Cas & Racines & Solution $y_h$ & Physique\\
+\midrule
+$\Delta > 0$ & $r_1 \neq r_2$ réelles & $C_1e^{r_1x} + C_2e^{r_2x}$ & Apériodique\\
+$\Delta = 0$ & $r$ double & $(C_1 + C_2x)e^{rx}$ & Critique\\
+$\Delta < 0$ & $\alpha \pm i\beta$ & $e^{\alpha x}(C_1\cos\beta x + C_2\sin\beta x)$ & Pseudo-périodique\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{methodebox}
+
+\vspace{6pt}
+
+\begin{methodebox}
+\textbf{Intégrales - Changements de variables et jacobiens}
+
+\vspace{4pt}
+\begin{center}
+\begin{tabular}{@{}llll@{}}
+\toprule
+Domaine & Changement & Jacobien & Bornes typiques\\
+\midrule
+Disque & Polaires : $x=r\cos\theta$, $y=r\sin\theta$ & $r$ & $r\in[0,R]$, $\theta\in[0,2\pi]$\\
+Cylindre & Cylindriques : $x=r\cos\theta$, $z=z$ & $r$ & $r\in[0,R]$, $z\in[z_1,z_2]$\\
+Boule & Sphériques : $x=\rho\sin\varphi\cos\theta$, ... & $\rho^2\sin\varphi$ & $\rho\in[0,R]$, $\varphi\in[0,\pi]$, $\theta\in[0,2\pi]$\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{methodebox}
+
+\vspace{6pt}
+
+\begin{methodebox}
+\textbf{Green-Riemann - Calcul d'aire}
+
+$$\mathrm{Aire}(D) = \frac{1}{2}\oint_{\partial D}(x\,dy - y\,dx) \qquad [\text{avec } P=-y/2,\; Q=x/2]$$
+
+Paramétrage du cercle de rayon $R$ : $x = R\cos t$, $y = R\sin t$, $t\in[0,2\pi]$.
+\end{methodebox}
+
+\end{document}

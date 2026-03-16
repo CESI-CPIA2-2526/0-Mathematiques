@@ -1,0 +1,287 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{parskip}
+
+\geometry{top=2cm, bottom=2.5cm, left=2.2cm, right=2.2cm}
+
+% En-tête / pied de page
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textit{Mathématiques - Analyse}}
+\fancyhead[R]{\small\textit{Contrôle continu}}
+\fancyfoot[C]{\small Page \thepage\ / \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Couleurs
+\definecolor{grisbox}{gray}{0.94}
+\definecolor{bleutexte}{RGB}{30,60,120}
+
+% Environnement de note
+\newmdenv[backgroundcolor=grisbox, linewidth=0pt, innerleftmargin=10pt,
+          innerrightmargin=10pt, innertopmargin=6pt, innerbottommargin=6pt,
+          skipabove=6pt, skipbelow=6pt]{notebox}
+
+% Style des sections
+\usepackage{titlesec}
+\titleformat{\section}[block]{\large\bfseries\color{bleutexte}}{}{0pt}{}[\vspace{-4pt}\rule{\linewidth}{0.4pt}]
+\titlespacing{\section}{0pt}{14pt}{6pt}
+
+% Numérotation des questions
+\newcounter{qnum}
+\newcommand{\question}[1]{%
+  \stepcounter{qnum}%
+  \medskip\noindent\textbf{Question \theqnum.}\quad #1\par
+}
+
+% Choix de réponse
+\newcommand{\choix}[4]{%
+  \begin{multicols}{2}
+  \begin{itemize}[label={}, leftmargin=1.2em, itemsep=1pt, topsep=2pt]
+    \item[\textbf{A)}] #1
+    \item[\textbf{B)}] #2
+    \item[\textbf{C)}] #3
+    \item[\textbf{D)}] #4
+  \end{itemize}
+  \end{multicols}
+}
+
+% Réponse libre générique
+\newcommand{\reponselibre}{%
+  \par\smallskip
+  \begin{notebox}
+  \textit{Réponse :} \hfill\rule{8cm}{0.3pt}
+  \vspace{4pt}
+
+  \hspace*{3cm}\rule{9.4cm}{0.3pt}
+  \end{notebox}
+}
+
+% Réponse avec attendus nommés
+\newcommand{\reponseattendueA}[1]{%
+  \par\smallskip
+  \begin{notebox}
+  \textit{Calcul :}\vspace{10pt}
+
+  \hspace*{2cm}\rule{10.2cm}{0.3pt}\vspace{6pt}
+
+  \hspace*{2cm}\rule{10.2cm}{0.3pt}\vspace{8pt}
+
+  \noindent #1
+  \end{notebox}
+}
+
+\begin{document}
+
+% ─── TITRE ───────────────────────────────────────────────────────────────────
+\begin{center}
+  {\Large\bfseries\color{bleutexte} Contrôle de mathématiques}\\[4pt]
+  {\large Fonctions de plusieurs variables \& Opérateurs vectoriels}\\[6pt]
+  \begin{tabular}{@{}r@{\hspace{4pt}}l@{\hspace{2cm}}r@{\hspace{4pt}}l@{}}
+    \textbf{Durée :}   & 1 heure &
+    \textbf{Barème :}  & QCM = 1 pt \quad Calcul = 2 pts \quad Total = 35 pts\\[2pt]
+    \multicolumn{4}{l}{\textit{Calculatrice autorisée - Aucun autre document}}\\
+  \end{tabular}
+\end{center}
+
+\vspace{2pt}
+\noindent\rule{\linewidth}{0.6pt}
+\vspace{4pt}
+
+\begin{notebox}
+\textbf{Nom :} \rule{6cm}{0.3pt}\quad
+\textbf{Prénom :} \rule{6cm}{0.3pt}\\[6pt]
+\textbf{Groupe :} \rule{4cm}{0.3pt}
+\end{notebox}
+
+% ─── PARTIE 1 ────────────────────────────────────────────────────────────────
+\section{Fonctions de plusieurs variables - Limites et continuité}
+
+\question{Soit $f : \mathbb{R}^2 \to \mathbb{R}$. Elle est continue en $a = (a_1, a_2)$ si et seulement si :}
+\choix{Elle admet des dérivées partielles en $a$}
+      {$\lim_{(x,y)\to a} f(x,y) = f(a)$}
+      {Elle est bornée au voisinage de $a$}
+      {$f(a) = 0$}
+
+\question{Une surface de $\mathbb{R}^3$ donnée sous forme implicite s'écrit :}
+\choix{$z = f(x,y)$}
+      {$\mathbf{r}(t) = (x(t),y(t),z(t))$}
+      {$F(x,y,z) = 0$}
+      {$(u,v) \mapsto (r_1(u,v), r_2(u,v), r_3(u,v))$}
+
+\question{\textit{[Calcul]} Soit $f(x,y) = \dfrac{xy}{x^2+y^2}$ pour $(x,y)\neq(0,0)$. Montrer que la limite en $(0,0)$ n'existe pas en testant les chemins $y=0$ et $y=x$.}
+\reponseattendueA{Chemin $y=0$ : $f(x,0) = $ \rule{3cm}{0.3pt} \hspace{1cm} Chemin $y=x$ : $f(x,x) = $ \rule{3cm}{0.3pt} \hspace{1cm} Conclusion : \rule{3cm}{0.3pt}}
+
+% ─── PARTIE 2 ────────────────────────────────────────────────────────────────
+\section{Différentielle et développement limité d'ordre 1 - Plan tangent}
+
+\question{La différentielle de $f(x,y) = x^2 y + \sin(y)$ est :}
+\choix{$df = 2y\,dx + x^2\,dy$}
+      {$df = 2xy\,dx + x^2\,dy$}
+      {$df = 2xy\,dx + (x^2+\cos y)\,dy$}
+      {$df = (2xy + x^2)\,d(x+y)$}
+
+\question{Si $f$ est différentiable en $a$, alors $f$ est nécessairement :}
+\choix{De classe $\mathcal{C}^1$ au voisinage de $a$}
+      {Deux fois dérivable en $a$}
+      {Continue en $a$}
+      {Analytique en $a$}
+
+\question{L'équation du plan tangent à la surface $z = f(x,y)$ au point $(a,b,f(a,b))$ est :}
+\choix{$z = f(a,b)\cdot(x+y)$}
+      {$z = f(a,b) + \dfrac{\partial f}{\partial x}(a,b)(x-a) + \dfrac{\partial f}{\partial y}(a,b)(y-b)$}
+      {$z = \dfrac{\partial f}{\partial x}(a,b)\,x + \dfrac{\partial f}{\partial y}(a,b)\,y$}
+      {$z = f'(a)(x-a)$}
+
+\question{\textit{[Calcul]} Soit $f(x,y) = x^2 e^y$. Calculer la différentielle $df$, puis l'équation du plan tangent en $(1,0)$.}
+\reponseattendueA{$df = $ \rule{6cm}{0.3pt} \hspace{1cm} Plan tangent en $(1,0)$ : $z = $ \rule{4cm}{0.3pt}}
+
+% ─── PARTIE 3 ────────────────────────────────────────────────────────────────
+\section{Dérivées partielles - Théorème de Schwartz - DL d'ordre 2}
+
+\question{Si $f(x,y) = g(h(x,y))$ (composition), la règle de la chaîne donne :}
+\choix{$\dfrac{\partial f}{\partial x} = g'(h) \cdot \dfrac{\partial h}{\partial x}$}
+      {$\dfrac{\partial f}{\partial x} = g'(h) + \dfrac{\partial h}{\partial x}$}
+      {$\dfrac{\partial f}{\partial x} = g(h) \cdot h(x,y)$}
+      {$\dfrac{\partial f}{\partial x} = g''(h)$}
+
+\question{Le théorème de Schwartz affirme que, pour $f \in \mathcal{C}^2$ :}
+\choix{$\dfrac{\partial^2 f}{\partial x^2} = \dfrac{\partial^2 f}{\partial y^2}$}
+      {$\dfrac{\partial^2 f}{\partial x\partial y} = \dfrac{\partial^2 f}{\partial y\partial x}$}
+      {$\dfrac{\partial f}{\partial x} = \dfrac{\partial f}{\partial y}$}
+      {$\Delta f = 0$}
+
+\question{\textit{[Calcul]} Soit $f(x,y) = x^3\sin(y)$. Calculer $\dfrac{\partial f}{\partial x}$, $\dfrac{\partial f}{\partial y}$, $\dfrac{\partial^2 f}{\partial x^2}$ et $\dfrac{\partial^2 f}{\partial x\partial y}$. Vérifier Schwartz.}
+\reponseattendueA{$\dfrac{\partial f}{\partial x} = $ \rule{3cm}{0.3pt}\quad $\dfrac{\partial f}{\partial y} = $ \rule{3cm}{0.3pt}\quad $\dfrac{\partial^2 f}{\partial x^2} = $ \rule{3cm}{0.3pt}\quad $\dfrac{\partial^2 f}{\partial x\partial y} = $ \rule{3cm}{0.3pt}}
+
+% ─── PARTIE 4 ────────────────────────────────────────────────────────────────
+\section{Équations aux dérivées partielles}
+
+\question{L'équation $\dfrac{\partial u}{\partial x} + 2\dfrac{\partial u}{\partial y} = 0$ est :}
+\choix{Du second ordre, linéaire}
+      {Du premier ordre, linéaire homogène}
+      {Du premier ordre, non linéaire}
+      {Une équation des ondes}
+
+\question{L'équation de propagation des ondes en une dimension s'écrit :}
+\choix{$\dfrac{\partial u}{\partial t} = k\dfrac{\partial^2 u}{\partial x^2}$}
+      {$\dfrac{\partial^2 u}{\partial x^2} + \dfrac{\partial^2 u}{\partial y^2} = 0$}
+      {$\dfrac{\partial^2 u}{\partial t^2} = c^2 \dfrac{\partial^2 u}{\partial x^2}$}
+      {$\dfrac{\partial u}{\partial t} + u\dfrac{\partial u}{\partial x} = 0$}
+
+\question{Pour résoudre $\dfrac{\partial^2 u}{\partial t^2} = c^2\dfrac{\partial^2 u}{\partial x^2}$ par la méthode de d'Alembert, le changement de variables approprié est :}
+\choix{$\xi = x^2,\ \eta = t^2$}
+      {$\xi = x/c,\ \eta = t/c$}
+      {$\xi = x + ct,\ \eta = x - ct$}
+      {$\xi = \cos(x),\ \eta = \sin(ct)$}
+
+% ─── PARTIE 5 ────────────────────────────────────────────────────────────────
+\section{Extrema d'une fonction de deux variables}
+
+\question{Un point $(a,b)$ est un point critique de $f$ si et seulement si :}
+\choix{$f(a,b) = 0$}
+      {$\nabla f(a,b) = \mathbf{0}$, c'est-à-dire $\dfrac{\partial f}{\partial x}(a,b) = \dfrac{\partial f}{\partial y}(a,b) = 0$}
+      {La hessienne de $f$ en $(a,b)$ est nulle}
+      {$f$ n'est pas définie en $(a,b)$}
+
+\question{\textit{[Calcul]} Trouver les points critiques de $f(x,y) = x^2 + y^2 - 2x - 4y + 1$.}
+\reponseattendueA{$\nabla f = \mathbf{0}$ \hspace{0.5cm} $\Rightarrow$ \hspace{0.5cm} Point(s) critique(s) : \rule{5cm}{0.3pt}}
+
+\question{Soit $H = \dfrac{\partial^2 f}{\partial x^2}\dfrac{\partial^2 f}{\partial y^2} - \!\left(\dfrac{\partial^2 f}{\partial x\partial y}\right)^{\!2}$ le discriminant hessien. Si $H > 0$ et $\dfrac{\partial^2 f}{\partial x^2}(a,b) > 0$, alors $(a,b)$ est :}
+\choix{Un maximum local}
+      {Un minimum local}
+      {Un point selle}
+      {On ne peut pas conclure}
+
+\question{\textit{[Calcul]} Pour la fonction de la question précédente, calculer $H$ au point critique trouvé et conclure.}
+\reponseattendueA{$\dfrac{\partial^2 f}{\partial x^2} = $ \rule{2cm}{0.3pt}\quad $\dfrac{\partial^2 f}{\partial y^2} = $ \rule{2cm}{0.3pt}\quad $\dfrac{\partial^2 f}{\partial x\partial y} = $ \rule{2cm}{0.3pt}\quad $H = $ \rule{2cm}{0.3pt} \hspace{0.5cm} Nature : \rule{3.5cm}{0.3pt}}
+
+\question{Un point col (point selle) est un point critique $(a,b)$ tel que :}
+\choix{$H > 0$ et $\dfrac{\partial^2 f}{\partial x^2}(a,b) > 0$}
+      {$H > 0$ et $\dfrac{\partial^2 f}{\partial x^2}(a,b) < 0$}
+      {$H < 0$}
+      {$H = 0$}
+
+% ─── PARTIE 6 ────────────────────────────────────────────────────────────────
+\section{Opérateurs vectoriels - Gradient, Rotationnel, Divergence, Laplacien}
+
+\question{Le gradient d'un champ scalaire $f(x,y,z)$ est :}
+\choix{$\nabla f = \dfrac{\partial f}{\partial x} + \dfrac{\partial f}{\partial y} + \dfrac{\partial f}{\partial z}$}
+      {$\nabla f = \left(\dfrac{\partial f}{\partial x},\ \dfrac{\partial f}{\partial y},\ \dfrac{\partial f}{\partial z}\right)$}
+      {$\nabla f = \dfrac{\partial^2 f}{\partial x^2} + \dfrac{\partial^2 f}{\partial y^2} + \dfrac{\partial^2 f}{\partial z^2}$}
+      {$\nabla f = f\cdot\left(\dfrac{\partial}{\partial x} + \dfrac{\partial}{\partial y} + \dfrac{\partial}{\partial z}\right)$}
+
+\question{En tout point, le vecteur gradient $\nabla f$ est orienté :}
+\choix{Parallèlement aux surfaces de niveau de $f$}
+      {Perpendiculairement aux surfaces de niveau, dans le sens des valeurs croissantes}
+      {Dans la direction de l'axe $Oz$}
+      {Vers le minimum de $f$}
+
+\question{Le rotationnel de $\mathbf{F} = (P, Q, R)$ est :}
+\choix{$\text{rot}\,\mathbf{F} = \dfrac{\partial P}{\partial x} + \dfrac{\partial Q}{\partial y} + \dfrac{\partial R}{\partial z}$}
+      {$\text{rot}\,\mathbf{F} = \!\left(\dfrac{\partial R}{\partial y}-\dfrac{\partial Q}{\partial z},\ \dfrac{\partial P}{\partial z}-\dfrac{\partial R}{\partial x},\ \dfrac{\partial Q}{\partial x}-\dfrac{\partial P}{\partial y}\right)$}
+      {$\text{rot}\,\mathbf{F} = \!\left(\dfrac{\partial P}{\partial x},\ \dfrac{\partial Q}{\partial y},\ \dfrac{\partial R}{\partial z}\right)$}
+      {$\text{rot}\,\mathbf{F} = \nabla\cdot\mathbf{F}$}
+
+\question{Si $\mathbf{F} = \nabla f$ est un champ gradient (champ conservatif), alors :}
+\choix{$\text{div}\,\mathbf{F} = 0$}
+      {$\text{rot}\,\mathbf{F} = \mathbf{0}$}
+      {$\Delta f = 0$}
+      {$\mathbf{F} = \mathbf{0}$}
+
+\question{La divergence de $\mathbf{F} = (P, Q, R)$ est :}
+\choix{$\text{div}\,\mathbf{F} = \!\left(\dfrac{\partial Q}{\partial z}-\dfrac{\partial R}{\partial y},\ \dfrac{\partial R}{\partial x}-\dfrac{\partial P}{\partial z},\ \dfrac{\partial P}{\partial y}-\dfrac{\partial Q}{\partial x}\right)$}
+      {$\text{div}\,\mathbf{F} = \dfrac{\partial P}{\partial x} + \dfrac{\partial Q}{\partial y} + \dfrac{\partial R}{\partial z}$}
+      {$\text{div}\,\mathbf{F} = \sqrt{P^2+Q^2+R^2}$}
+      {$\text{div}\,\mathbf{F} = \dfrac{\partial P}{\partial y} + \dfrac{\partial Q}{\partial z} + \dfrac{\partial R}{\partial x}$}
+
+\question{L'opérateur laplacien d'un champ scalaire $f$ est :}
+\choix{$\Delta f = \left(\dfrac{\partial f}{\partial x},\ \dfrac{\partial f}{\partial y},\ \dfrac{\partial f}{\partial z}\right)$}
+      {$\Delta f = \dfrac{\partial f}{\partial x} \cdot \dfrac{\partial f}{\partial y} \cdot \dfrac{\partial f}{\partial z}$}
+      {$\Delta f = \dfrac{\partial^2 f}{\partial x^2} + \dfrac{\partial^2 f}{\partial y^2} + \dfrac{\partial^2 f}{\partial z^2}$}
+      {$\Delta f = \text{rot}(\nabla f)$}
+
+\question{Une fonction $f$ vérifiant $\Delta f = 0$ est dite :}
+\choix{Solénoïdale}
+      {Harmonique}
+      {Irrotationnelle}
+      {Lipschitzienne}
+
+\question{\textit{[Calcul]} Soit $\mathbf{F}(x,y,z) = (x^2,\ yz,\ xz)$. Calculer $\text{div}\,\mathbf{F}$ et $\text{rot}\,\mathbf{F}$.}
+\reponseattendueA{$\text{div}\,\mathbf{F} = $ \rule{5cm}{0.3pt} \hspace{1.5cm} $\text{rot}\,\mathbf{F} = $ \rule{5cm}{0.3pt}}
+
+% ─── PARTIE 7 ────────────────────────────────────────────────────────────────
+\section{Opérateurs vectoriels - Applications géométriques}
+
+\question{Le vecteur normal à la surface $F(x,y,z) = 0$ en un point $M$ est donné par :}
+\choix{$\text{div}\,F(M)$}
+      {$\Delta F(M)$}
+      {$\nabla F(M)$}
+      {$\text{rot}\,\nabla F(M)$}
+
+\question{L'équation du plan tangent à la surface $F(x,y,z) = 0$ au point $M_0 = (x_0,y_0,z_0)$ est :}
+\choix{$F(x,y,z) = F(x_0,y_0,z_0)$}
+      {$\dfrac{\partial F}{\partial x}(M_0)(x-x_0) + \dfrac{\partial F}{\partial y}(M_0)(y-y_0) + \dfrac{\partial F}{\partial z}(M_0)(z-z_0) = 0$}
+      {$\nabla F(M_0) \cdot (x,y,z) = 0$}
+      {$F(x-x_0,\ y-y_0,\ z-z_0) = 0$}
+
+\question{\textit{[Calcul]} Soit la sphère $F(x,y,z) = x^2+y^2+z^2-9$. Calculer $\nabla F$ en $M_0 = (1,2,2)$ et donner l'équation du plan tangent en ce point.}
+\reponseattendueA{$\nabla F(M_0) = $ \rule{4cm}{0.3pt} \hspace{1cm} Équation du plan tangent : \rule{5cm}{0.3pt}}
+
+
+\end{document}

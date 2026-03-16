@@ -1,0 +1,13 @@
+# LaTeX auxiliaires
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.blg
+*.bbl
+*.nav
+*.snm
+*.vrb

@@ -1,0 +1,160 @@
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{parskip}
+
+\geometry{top=1.8cm, bottom=2cm, left=1.8cm, right=1.8cm}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textit{Mathématiques, fiche de révision}}
+\fancyhead[R]{\small\textit{Équations différentielles}}
+\fancyfoot[C]{\small\thepage}
+\fancyfoot[R]{\tiny\textcopyright\ Rohan Fossé}
+\renewcommand{\headrulewidth}{0.3pt}
+
+\definecolor{bleu}{RGB}{30,60,120}
+\definecolor{vert}{RGB}{0,110,60}
+\definecolor{rouge}{RGB}{160,20,20}
+\definecolor{gris}{gray}{0.93}
+\definecolor{jauneclair}{RGB}{255,250,220}
+\definecolor{vertclair}{RGB}{220,245,220}
+\definecolor{bleutresleger}{RGB}{230,240,255}
+
+\newmdenv[backgroundcolor=gris, linewidth=0pt,
+  innerleftmargin=8pt, innerrightmargin=8pt,
+  innertopmargin=5pt, innerbottommargin=5pt,
+  skipabove=4pt, skipbelow=4pt]{grisbox}
+
+\newmdenv[backgroundcolor=jauneclair, linecolor=rouge, linewidth=1pt,
+  innerleftmargin=8pt, innerrightmargin=8pt,
+  innertopmargin=5pt, innerbottommargin=5pt,
+  skipabove=4pt, skipbelow=4pt]{alertbox}
+
+\newmdenv[backgroundcolor=bleutresleger, linecolor=bleu, linewidth=1pt,
+  innerleftmargin=8pt, innerrightmargin=8pt,
+  innertopmargin=5pt, innerbottommargin=5pt,
+  skipabove=4pt, skipbelow=4pt]{theobox}
+
+\titleformat{\section}[block]{\normalsize\bfseries\color{bleu}}{}{0pt}{}[\vspace{-3pt}\rule{\linewidth}{0.5pt}]
+\titlespacing{\section}{0pt}{10pt}{4pt}
+
+\titleformat{\subsection}[runin]{\small\bfseries\color{vert}}{}{0pt}{}[\ :]
+\titlespacing{\subsection}{0pt}{4pt}{0pt}
+
+\begin{document}
+
+\begin{center}
+  {\Large\bfseries\color{bleu} Fiche de révision : Équations différentielles}\\[3pt]
+  {\small EDO du 1\textsuperscript{er} ordre · EDO du 2\textsuperscript{e} ordre · Conditions initiales}
+\end{center}
+\noindent\rule{\linewidth}{0.8pt}
+
+\begin{multicols}{2}
+
+\section{EDO du 1\textsuperscript{er} ordre, homogène}
+
+\begin{grisbox}
+\textbf{Forme :} $y' + p(x)\,y = 0$
+
+\textbf{Méthode :} séparation des variables ou équation caractéristique.
+
+\textbf{Équation caractéristique :} $r + p = 0 \Rightarrow r = -p$
+
+$$\boxed{y(x) = C\,e^{-\int p(x)\,dx}}$$
+
+\textbf{Si $p$ est constant :} $y' + ay = 0 \Rightarrow y = Ce^{-ax}$
+\end{grisbox}
+
+\section{EDO du 1\textsuperscript{er} ordre avec second membre}
+
+\begin{grisbox}
+\textbf{Forme :} $y' + p(x)\,y = q(x)$
+
+\textbf{Solution générale :} $y = y_h + y_p$
+\begin{itemize}[leftmargin=1em,itemsep=1pt]
+  \item $y_h$ : solution de l'équation homogène associée
+  \item $y_p$ : une solution particulière
+\end{itemize}
+
+\textbf{Méthode de variation de la constante :}
+Poser $y = C(x)\cdot y_h$, dériver et substituer pour trouver $C'(x)$.
+\end{grisbox}
+
+\section{EDO du 2\textsuperscript{e} ordre, homogène}
+
+\begin{grisbox}
+\textbf{Forme :} $ay'' + by' + cy = 0$ \quad ($a,b,c$ constants)
+
+\textbf{Équation caractéristique :} $ar^2 + br + c = 0$
+
+\textbf{Discriminant $\Delta = b^2 - 4ac$ :}
+
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}lp{4.5cm}@{}}
+$\Delta > 0$ & $r_1 \neq r_2$ réels : $y = C_1 e^{r_1 x} + C_2 e^{r_2 x}$ \\
+$\Delta = 0$ & $r_1 = r_2 = r$ : $y = (C_1 + C_2 x)e^{rx}$ \\
+$\Delta < 0$ & $r = \alpha \pm \beta i$ : $y = e^{\alpha x}(C_1\cos\beta x + C_2\sin\beta x)$ \\
+\end{tabular}
+\end{grisbox}
+
+\section{EDO du 2\textsuperscript{e} ordre avec second membre}
+
+\begin{grisbox}
+\textbf{Forme :} $ay'' + by' + cy = f(x)$
+
+\textbf{Solution générale :} $y = y_h + y_p$
+
+\textbf{Choix de $y_p$} (second membre $f(x)$) :
+\begin{itemize}[leftmargin=1em,itemsep=1pt]
+  \item $f(x)=e^{\lambda x}$ et $\lambda$ \textbf{pas} racine carac. : $y_p = Ae^{\lambda x}$
+  \item $f(x)=e^{\lambda x}$ et $\lambda$ racine simple : $y_p = Axe^{\lambda x}$
+  \item $f(x)=\cos(\omega x)$ ou $\sin(\omega x)$ : $y_p = A\cos\omega x + B\sin\omega x$
+  \item $f(x)$ polynôme de degré $n$ : $y_p$ polynôme de degré $n$
+\end{itemize}
+\end{grisbox}
+
+\begin{alertbox}
+\textbf{Attention !} Si $e^{\lambda x}$ est déjà solution de l'homogène, multiplier $y_p$ par $x$ (ou $x^2$ si racine double).
+\end{alertbox}
+
+\section{Conditions initiales}
+
+\begin{grisbox}
+Après avoir trouvé la solution générale (avec les constantes $C$, $C_1$, $C_2$), appliquer les conditions données :
+
+\textbf{Pour un 1\textsuperscript{er} ordre :} 1 condition $\Rightarrow$ 1 équation pour $C$
+
+\textbf{Pour un 2\textsuperscript{e} ordre :} 2 conditions $y(x_0)=a$, $y'(x_0)=b$
+$\Rightarrow$ système de 2 équations pour $C_1$ et $C_2$
+\end{grisbox}
+
+\section{Méthode en 4 étapes}
+
+\begin{grisbox}
+\textbf{1.} Écrire l'équation caractéristique
+
+\textbf{2.} Résoudre : calculer $\Delta$ et les racines
+
+\textbf{3.} Écrire $y_h$ selon le cas ($\Delta>0$, $\Delta=0$, $\Delta<0$)
+
+\textbf{4.} Trouver $y_p$ si second membre, puis $y = y_h + y_p$
+
+\textbf{5.} (Si C.I.) Dériver $y$, substituer les conditions, résoudre le système
+\end{grisbox}
+
+\end{multicols}
+
+\end{document}

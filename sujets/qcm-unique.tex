@@ -1,0 +1,422 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{parskip}
+
+\geometry{top=2cm, bottom=2.5cm, left=2.2cm, right=2.2cm}
+
+% En-tête / pied de page
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textit{Mathématiques - Analyse}}
+\fancyhead[R]{\small\textit{Épreuve de synthèse}}
+\fancyfoot[C]{\small Page \thepage\ / \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Couleurs
+\definecolor{grisbox}{gray}{0.94}
+\definecolor{bleutexte}{RGB}{30,60,120}
+
+% Environnement de note
+\newmdenv[backgroundcolor=grisbox, linewidth=0pt, innerleftmargin=10pt,
+          innerrightmargin=10pt, innertopmargin=6pt, innerbottommargin=6pt,
+          skipabove=6pt, skipbelow=6pt]{notebox}
+
+% Style des sections
+\usepackage{titlesec}
+\titleformat{\section}[block]{\large\bfseries\color{bleutexte}}{}{0pt}{}[\vspace{-4pt}\rule{\linewidth}{0.4pt}]
+\titlespacing{\section}{0pt}{14pt}{6pt}
+
+% Numérotation des questions
+\newcounter{qnum}
+\newcommand{\question}[1]{%
+  \stepcounter{qnum}%
+  \medskip\noindent\textbf{Question \theqnum.}\quad #1\par
+}
+
+% Choix de réponse
+\newcommand{\choix}[4]{%
+  \begin{multicols}{2}
+  \begin{itemize}[label={}, leftmargin=1.2em, itemsep=1pt, topsep=2pt]
+    \item[\textbf{A)}] #1
+    \item[\textbf{B)}] #2
+    \item[\textbf{C)}] #3
+    \item[\textbf{D)}] #4
+  \end{itemize}
+  \end{multicols}
+}
+
+% Réponse avec attendus
+\newcommand{\reponseattendueA}[1]{%
+  \par\smallskip
+  \begin{notebox}
+  \textit{Calcul :}\vspace{10pt}
+
+  \hspace*{2cm}\rule{10.2cm}{0.3pt}\vspace{6pt}
+
+  \hspace*{2cm}\rule{10.2cm}{0.3pt}\vspace{8pt}
+
+  \noindent #1
+  \end{notebox}
+}
+
+\begin{document}
+
+% ─── TITRE ───────────────────────────────────────────────────────────────────
+\begin{center}
+  {\Large\bfseries\color{bleutexte} Épreuve de synthèse — Mathématiques}\\[4pt]
+  {\large Fonctions de plusieurs variables, Opérateurs vectoriels \& Équations différentielles}\\[6pt]
+  \begin{tabular}{@{}r@{\hspace{4pt}}l@{\hspace{2cm}}r@{\hspace{4pt}}l@{}}
+    \textbf{Durée :}   & 1 heure &
+    \textbf{Barème :}  & QCM = 1 pt \quad Calcul = 2 pts \quad Total = 35 pts\\[2pt]
+    \multicolumn{4}{l}{\textit{Calculatrice autorisée - Aucun autre document}}\\
+  \end{tabular}
+\end{center}
+
+\vspace{2pt}
+\noindent\rule{\linewidth}{0.6pt}
+\vspace{4pt}
+
+\begin{notebox}
+\textbf{Nom :} \rule{6cm}{0.3pt}\quad
+\textbf{Prénom :} \rule{6cm}{0.3pt}\\[6pt]
+\textbf{Groupe :} \rule{4cm}{0.3pt}
+\end{notebox}
+
+% ─── PARTIE 1 ────────────────────────────────────────────────────────────────
+\section{Fonctions de plusieurs variables — définitions fondamentales}
+
+\question{Soit $f : \mathbb{R}^2 \to \mathbb{R}$. Elle est continue en $a = (a_1, a_2)$ si et seulement si :}
+\choix{$\lim_{(x,y)\to a} f(x,y) = f(a)$}
+      {Elle admet des dérivées partielles en $a$}
+      {Elle est bornée au voisinage de $a$}
+      {$f(a) = 0$}
+
+\question{Une surface de $\mathbb{R}^3$ donnée sous forme implicite s'écrit :}
+\choix{$\mathbf{r}(t) = (x(t),y(t),z(t))$}
+      {$z = f(x,y)$}
+      {$(u,v) \mapsto (r_1(u,v),\, r_2(u,v),\, r_3(u,v))$}
+      {$F(x,y,z) = 0$}
+
+\question{La dérivée partielle $\dfrac{\partial f}{\partial x}(a,b)$ représente :}
+\choix{La différentielle totale de $f$ en $(a,b)$}
+      {Le taux de variation de $f$ dans toutes les directions en $(a,b)$}
+      {La pente de la tangente à la courbe $x \mapsto f(x,b)$ en $a$, $y$ fixé à $b$}
+      {La pente de la tangente à la courbe $y \mapsto f(a,y)$ en $b$}
+
+\question{Si $f$ est différentiable en $(a,b)$, alors $f$ est nécessairement :}
+\choix{De classe $\mathcal{C}^1$ au voisinage de $(a,b)$}
+      {Continue en $(a,b)$}
+      {Deux fois dérivable en $(a,b)$}
+      {Analytique en $(a,b)$}
+
+\question{Pour montrer que $\lim_{(x,y)\to(0,0)} f(x,y)$ n'existe pas, on peut :}
+\choix{Vérifier que $f(0,0)$ n'est pas définie}
+      {Montrer que $f$ est non bornée au voisinage de $(0,0)$}
+      {Calculer les dérivées partielles en $(0,0)$}
+      {Trouver deux chemins aboutissant à des limites différentes}
+
+\question{\textit{[Calcul]} Soit $f(x,y) = x^2 e^{y}$. Calculer $\dfrac{\partial f}{\partial x}$ et $\dfrac{\partial f}{\partial y}$.}
+\reponseattendueA{$\dfrac{\partial f}{\partial x} = $ \rule{4cm}{0.3pt} \hspace{2.5cm} $\dfrac{\partial f}{\partial y} = $ \rule{4cm}{0.3pt}}
+
+% ─── PARTIE 2 ────────────────────────────────────────────────────────────────
+\section{Différentielle, règle des chaînes et plan tangent}
+
+\question{La différentielle de $f(x,y) = x^2 y + \sin(y)$ est :}
+\choix{$df = 2xy\,dx + (x^2+\cos y)\,dy$}
+      {$df = 2y\,dx + x^2\,dy$}
+      {$df = (2xy + x^2)\,d(x+y)$}
+      {$df = 2xy\,dx + x^2\,dy$}
+
+\question{Si $f(x,y) = g(h(x,y))$ (composition), la règle de la chaîne donne :}
+\choix{$\dfrac{\partial f}{\partial x} = g'(h) + \dfrac{\partial h}{\partial x}$}
+      {$\dfrac{\partial f}{\partial x} = g(h) \cdot h(x,y)$}
+      {$\dfrac{\partial f}{\partial x} = g'(h) \cdot \dfrac{\partial h}{\partial x}$}
+      {$\dfrac{\partial f}{\partial x} = g''(h)$}
+
+\question{Le théorème de Schwartz affirme que, pour $f \in \mathcal{C}^2$ :}
+\choix{$\dfrac{\partial^2 f}{\partial x^2} = \dfrac{\partial^2 f}{\partial y^2}$}
+      {$\dfrac{\partial^2 f}{\partial x\partial y} = \dfrac{\partial^2 f}{\partial y\partial x}$}
+      {$\dfrac{\partial f}{\partial x} = \dfrac{\partial f}{\partial y}$}
+      {$\Delta f = 0$}
+
+\question{L'équation du plan tangent à la surface $z = f(x,y)$ au point $(a,b,f(a,b))$ est :}
+\choix{$z = f(a,b)\cdot(x+y)$}
+      {$z = \dfrac{\partial f}{\partial x}(a,b)\,x + \dfrac{\partial f}{\partial y}(a,b)\,y$}
+      {$z = f'(a)(x-a)$}
+      {$z = f(a,b) + \dfrac{\partial f}{\partial x}(a,b)(x-a) + \dfrac{\partial f}{\partial y}(a,b)(y-b)$}
+
+\question{Pour une surface $F(x,y,z)=0$, le vecteur normal en un point $M_0$ est :}
+\choix{$\nabla F(M_0)$}
+      {$\text{rot}\,\nabla F(M_0)$}
+      {$\Delta F(M_0)$}
+      {$(F_x + F_y + F_z)(M_0)$}
+
+\question{\textit{[Calcul]} Soit $f(x,y) = x^3\sin(y)$. Calculer $\dfrac{\partial f}{\partial x}$, $\dfrac{\partial f}{\partial y}$ et $\dfrac{\partial^2 f}{\partial x\partial y}$.
+Vérifier que le théorème de Schwartz s'applique.}
+\reponseattendueA{$\dfrac{\partial f}{\partial x} = $ \rule{3.2cm}{0.3pt}\quad
+$\dfrac{\partial f}{\partial y} = $ \rule{3.2cm}{0.3pt}\quad
+$\dfrac{\partial^2 f}{\partial x\partial y} = $ \rule{3.2cm}{0.3pt}}
+
+% ─── PARTIE 3 ────────────────────────────────────────────────────────────────
+\section{Opérateurs vectoriels — gradient, divergence, rotationnel}
+
+\question{Le gradient d'un champ scalaire $f(x,y,z)$ est :}
+\choix{$\nabla f = \dfrac{\partial^2 f}{\partial x^2} + \dfrac{\partial^2 f}{\partial y^2} + \dfrac{\partial^2 f}{\partial z^2}$}
+      {$\nabla f = \dfrac{\partial f}{\partial x} + \dfrac{\partial f}{\partial y} + \dfrac{\partial f}{\partial z}$}
+      {$\nabla f = \left(\dfrac{\partial f}{\partial x},\ \dfrac{\partial f}{\partial y},\ \dfrac{\partial f}{\partial z}\right)$}
+      {$\nabla f = f\cdot\left(\dfrac{\partial}{\partial x} + \dfrac{\partial}{\partial y} + \dfrac{\partial}{\partial z}\right)$}
+
+\question{En tout point, le vecteur gradient $\nabla f$ est orienté :}
+\choix{Perpendiculairement aux surfaces de niveau, dans le sens des valeurs croissantes}
+      {Parallèlement aux surfaces de niveau de $f$}
+      {Dans la direction de l'axe $Oz$}
+      {Vers le minimum de $f$}
+
+\question{La divergence de $\mathbf{F} = (P, Q, R)$ est :}
+\choix{$\sqrt{P^2+Q^2+R^2}$}
+      {$\dfrac{\partial P}{\partial x} + \dfrac{\partial Q}{\partial y} + \dfrac{\partial R}{\partial z}$}
+      {$\dfrac{\partial P}{\partial y} + \dfrac{\partial Q}{\partial z} + \dfrac{\partial R}{\partial x}$}
+      {Le vecteur $\!\left(\dfrac{\partial Q}{\partial z}-\dfrac{\partial R}{\partial y},\ \dfrac{\partial P}{\partial z}-\dfrac{\partial R}{\partial x},\ \dfrac{\partial Q}{\partial x}-\dfrac{\partial P}{\partial y}\right)$}
+
+\question{Si $\mathbf{F} = \nabla f$ est un champ gradient (champ conservatif), alors :}
+\choix{$\text{div}\,\mathbf{F} = 0$}
+      {$\Delta f = 0$}
+      {$\mathbf{F} = \mathbf{0}$}
+      {$\text{rot}\,\mathbf{F} = \mathbf{0}$}
+
+\question{Le laplacien d'un champ scalaire $f(x,y,z)$ est défini par :}
+\choix{$\Delta f = \dfrac{\partial^2 f}{\partial x^2} + \dfrac{\partial^2 f}{\partial y^2} + \dfrac{\partial^2 f}{\partial z^2}$}
+      {$\Delta f = \left(\dfrac{\partial f}{\partial x}\right)^2 + \left(\dfrac{\partial f}{\partial y}\right)^2 + \left(\dfrac{\partial f}{\partial z}\right)^2$}
+      {$\Delta f = \text{rot}(\nabla f)$}
+      {$\Delta f = \nabla \cdot f$}
+
+\question{\textit{[Calcul]} Soit $\mathbf{F}(x,y,z) = (x^2,\ yz,\ xz)$. Calculer $\text{div}\,\mathbf{F}$.}
+\reponseattendueA{$\text{div}\,\mathbf{F}
+  = \dfrac{\partial(x^2)}{\partial x} + \dfrac{\partial(yz)}{\partial y} + \dfrac{\partial(xz)}{\partial z}
+  = \rule{1.3cm}{0.3pt}\ +\ \rule{1.3cm}{0.3pt}\ +\ \rule{1.3cm}{0.3pt}
+  = \rule{2.5cm}{0.3pt}$}
+
+% ─── PARTIE 4 ────────────────────────────────────────────────────────────────
+\section{Équations différentielles — rappels de cours}
+
+\question{Laquelle de ces équations est une EDO linéaire du 1\textsuperscript{er} ordre ?}
+\choix{$y'' + 2y = 0$}
+      {$y \cdot y' = x$}
+      {$y' + 3y = e^x$}
+      {$(y')^2 = y$}
+
+\question{La solution générale de $y' - 4y = 0$ est :}
+\choix{$y = Ce^{-4x}$}
+      {$y = 4x + C$}
+      {$y = C\cos(4x)$}
+      {$y = Ce^{4x}$}
+
+\question{L'équation caractéristique associée à $y'' - 5y' + 6y = 0$ est :}
+\choix{$r^2 + 5r + 6 = 0$}
+      {$r - 5 + 6 = 0$}
+      {$r^2 - 5r + 6 = 0$}
+      {$r^2 - 5r = 0$}
+
+\question{L'équation $y'' + 2y' + 5y = 0$ admet les racines complexes $r = -1 \pm 2i$. Sa solution générale est :}
+\choix{$y = e^{-x}(C_1\cos 2x + C_2\sin 2x)$}
+      {$y = e^{x}(C_1\cos 2x + C_2\sin 2x)$}
+      {$y = (C_1 + C_2 x)\,e^{-x}$}
+      {$y = C_1 e^{-x} + C_2 e^{5x}$}
+
+\question{Si l'équation caractéristique admet une racine double $r_0$, la solution générale est :}
+\choix{$y = C_1 e^{r_0 x} + C_2 e^{-r_0 x}$}
+      {$y = (C_1 + C_2 x)\,e^{r_0 x}$}
+      {$y = e^{r_0 x}(C_1\cos r_0 x + C_2\sin r_0 x)$}
+      {$y = C\,e^{r_0 x}$}
+
+\question{\textit{[Calcul]} Résoudre l'équation caractéristique $r^2 - r - 6 = 0$. En déduire la solution générale de $y'' - y' - 6y = 0$.}
+\reponseattendueA{$\Delta = $ \rule{2.5cm}{0.3pt} \hspace{1cm} $r_1 = $ \rule{2.5cm}{0.3pt} \hspace{1cm} $r_2 = $ \rule{2.5cm}{0.3pt} \hspace{1cm} $y(x) = $ \rule{3.5cm}{0.3pt}}
+
+% ─── PARTIE 5 ────────────────────────────────────────────────────────────────
+\section{Extrema et intégrales doubles}
+
+\question{Un point $(a,b)$ est un point critique de $f$ si et seulement si :}
+\choix{$f(a,b) = 0$}
+      {La hessienne de $f$ en $(a,b)$ est nulle}
+      {$f$ n'est pas définie en $(a,b)$}
+      {$\nabla f(a,b) = \mathbf{0}$, c'est-à-dire $\dfrac{\partial f}{\partial x}(a,b) = \dfrac{\partial f}{\partial y}(a,b) = 0$}
+
+\question{Soit $H = \dfrac{\partial^2 f}{\partial x^2}\dfrac{\partial^2 f}{\partial y^2} - \!\left(\dfrac{\partial^2 f}{\partial x\partial y}\right)^{\!2}$ le discriminant hessien.
+Si $H > 0$ et $\dfrac{\partial^2 f}{\partial x^2}(a,b) > 0$, alors $(a,b)$ est :}
+\choix{Un point selle}
+      {Un minimum local}
+      {On ne peut pas conclure}
+      {Un maximum local}
+
+\question{Pour calculer $\displaystyle\iint_D \sqrt{x^2+y^2}\,dA$ sur le disque $x^2+y^2\leq 9$, le changement de variables le plus adapté est :}
+\choix{$x=u+v,\ y=u-v$}
+      {$x=r\cosh\theta,\ y=r\sinh\theta$}
+      {Coordonnées polaires : $x=r\cos\theta,\ y=r\sin\theta$}
+      {Aucun changement nécessaire}
+
+\question{On calcule $\displaystyle\iint_D xy\,dA$ sur $D=[0,1]\times[0,2]$. Par séparation de Fubini ($f=xy$ séparable sur un rectangle) :}
+\choix{$\displaystyle\int_0^1\!\int_0^2 (x+y)\,dy\,dx$}
+      {$\displaystyle\Bigl(\int_0^1 xy\,dx\Bigr)^2$}
+      {$\displaystyle 2\int_0^1\!\int_0^2 xy\,dy\,dx$}
+      {$\displaystyle\int_0^1 x\,dx \cdot \int_0^2 y\,dy$}
+
+\question{Si le discriminant hessien $H < 0$ en un point critique $(a,b)$, alors $(a,b)$ est :}
+\choix{Un minimum local}
+      {Un maximum local}
+      {Un point selle}
+      {On ne peut pas conclure}
+
+\question{\textit{[Calcul]} Calculer $\displaystyle\int_0^2\!\int_0^2 (x+y)\,dy\,dx$.}
+\reponseattendueA{$\displaystyle\int_0^2(x+y)\,dy = \rule{4cm}{0.3pt}$
+\hspace{1.5cm}
+$\displaystyle\int_0^2\!\int_0^2(x+y)\,dy\,dx = \rule{3cm}{0.3pt}$}
+
+% ─── CORRIGÉ ─────────────────────────────────────────────────────────────────
+\newpage
+\begin{center}
+  {\large\bfseries\color{bleutexte} Corrigé détaillé}\\[2pt]
+  {\small\itshape Les réponses QCM sont indiquées en gras. Les calculs sont développés étape par étape.}
+\end{center}
+
+\vspace{2pt}
+
+% ── Grille QCM ───────────────────────────────────────────────────────────────
+\begin{notebox}
+\textbf{Réponses QCM :}\quad
+Q1\,\textbf{A} \quad Q2\,\textbf{D} \quad Q3\,\textbf{C} \quad Q4\,\textbf{B} \quad Q5\,\textbf{D} \quad
+Q7\,\textbf{A} \quad Q8\,\textbf{C} \quad Q9\,\textbf{B} \quad Q10\,\textbf{D} \quad Q11\,\textbf{A} \quad
+Q13\,\textbf{C} \quad Q14\,\textbf{A} \quad Q15\,\textbf{B} \quad Q16\,\textbf{D} \quad Q17\,\textbf{A} \quad
+Q19\,\textbf{C} \quad Q20\,\textbf{D} \quad Q21\,\textbf{C} \quad Q22\,\textbf{A} \quad Q23\,\textbf{B} \quad
+Q25\,\textbf{D} \quad Q26\,\textbf{B} \quad Q27\,\textbf{C} \quad Q28\,\textbf{D} \quad Q29\,\textbf{C}
+\end{notebox}
+
+\vspace{4pt}
+
+% ── Justifications QCM ───────────────────────────────────────────────────────
+\noindent\textbf{Justifications QCM}
+
+\smallskip
+\noindent\textbf{Q1 — A.} Par définition, $f$ est continue en $a$ si et seulement si $\lim_{(x,y)\to a}f(x,y) = f(a)$. L'existence de dérivées partielles ne suffit pas à garantir la continuité.
+
+\smallskip
+\noindent\textbf{Q2 — D.} La forme \emph{implicite} est $F(x,y,z)=0$. La forme B est explicite ($z=f(x,y)$), A est une courbe paramétrée, C est une surface paramétrée.
+
+\smallskip
+\noindent\textbf{Q3 — C.} $\dfrac{\partial f}{\partial x}(a,b)$ est le taux de variation de $f$ quand \emph{seul} $x$ varie au voisinage de $a$, $y$ restant fixé à $b$. C'est la pente de la courbe $x\mapsto f(x,b)$ en $a$.
+
+\smallskip
+\noindent\textbf{Q4 — B.} La différentiabilité implique toujours la continuité. La réciproque est fausse : une fonction peut être continue sans être différentiable.
+
+\smallskip
+\noindent\textbf{Q5 — D.} La méthode des chemins : si deux chemins distincts aboutissent à des limites différentes, la limite n'existe pas. L'existence ou la non-existence de $f(0,0)$ est sans rapport avec la limite.
+
+\smallskip
+\noindent\textbf{Q7 — A.} On dérive terme à terme : $\dfrac{\partial(x^2y)}{\partial x} = 2xy$, $\dfrac{\partial(x^2y)}{\partial y} = x^2$, $\dfrac{\partial(\sin y)}{\partial y} = \cos y$. D'où $df = 2xy\,dx + (x^2+\cos y)\,dy$.
+
+\smallskip
+\noindent\textbf{Q8 — C.} Règle de la chaîne : $\dfrac{\partial f}{\partial x} = g'(h(x,y))\cdot\dfrac{\partial h}{\partial x}$. On dérive la fonction extérieure $g$ évaluée en $h$, puis on multiplie par la dérivée de $h$.
+
+\smallskip
+\noindent\textbf{Q9 — B.} Le théorème de Schwartz garantit l'égalité des dérivées croisées : si $f\in\mathcal{C}^2$, alors $\dfrac{\partial^2 f}{\partial x\partial y} = \dfrac{\partial^2 f}{\partial y\partial x}$. Il n'affirme pas l'égalité des dérivées secondes $f_{xx}$ et $f_{yy}$.
+
+\smallskip
+\noindent\textbf{Q10 — D.} Le plan tangent à $z=f(x,y)$ en $(a,b,f(a,b))$ est le développement limité d'ordre 1 : $z = f(a,b) + \dfrac{\partial f}{\partial x}(a,b)(x-a) + \dfrac{\partial f}{\partial y}(a,b)(y-b)$.
+
+\smallskip
+\noindent\textbf{Q11 — A.} Pour une surface implicite $F(x,y,z)=0$, le vecteur normal en $M_0$ est $\nabla F(M_0)$. C'est précisément la définition géométrique du gradient sur une surface de niveau.
+
+\smallskip
+\noindent\textbf{Q13 — C.} Le gradient est un \emph{vecteur} dont les composantes sont les dérivées partielles. A est le laplacien (scalaire), B est une somme scalaire (pas un vecteur).
+
+\smallskip
+\noindent\textbf{Q14 — A.} Le gradient est perpendiculaire aux surfaces de niveau (courbes $f=\mathrm{cst}$) et pointe dans la direction de plus forte augmentation de $f$.
+
+\smallskip
+\noindent\textbf{Q15 — B.} La divergence est un \emph{scalaire} : $\text{div}\,\mathbf{F} = \dfrac{\partial P}{\partial x}+\dfrac{\partial Q}{\partial y}+\dfrac{\partial R}{\partial z}$. D décrit le rotationnel (vecteur), C est une permutation cyclique erronée.
+
+\smallskip
+\noindent\textbf{Q16 — D.} Propriété fondamentale : tout champ gradient est irrotationnel, c'est-à-dire $\mathbf{F}=\nabla f \Rightarrow \text{rot}\,\mathbf{F}=\mathbf{0}$. A serait vrai pour un champ solénoïdal.
+
+\smallskip
+\noindent\textbf{Q17 — A.} Le laplacien est $\Delta f = \text{div}(\nabla f) = \dfrac{\partial^2 f}{\partial x^2} + \dfrac{\partial^2 f}{\partial y^2} + \dfrac{\partial^2 f}{\partial z^2}$. B confond les dérivées premières et secondes ; C est faux car $\text{rot}(\nabla f) = \mathbf{0}$.
+
+\smallskip
+\noindent\textbf{Q19 — C.} Une EDO linéaire du 1\textsuperscript{er} ordre s'écrit $y' + p(x)y = q(x)$ : $y$ et $y'$ à la puissance 1, sans produit entre eux. A est du 2\textsuperscript{e} ordre, B et D sont non linéaires.
+
+\smallskip
+\noindent\textbf{Q20 — D.} $y'-4y=0$ : équation caractéristique $r-4=0$, donc $r=4$, d'où $y=Ce^{4x}$.
+
+\smallskip
+\noindent\textbf{Q21 — C.} On substitue $y''\to r^2$, $y'\to r$, $y\to 1$ : l'équation $y''-5y'+6y=0$ donne $r^2-5r+6=0$.
+
+\smallskip
+\noindent\textbf{Q22 — A.} Pour des racines complexes $\alpha\pm\beta i$ (ici $\alpha=-1$, $\beta=2$), la solution est $y=e^{\alpha x}(C_1\cos\beta x + C_2\sin\beta x) = e^{-x}(C_1\cos 2x + C_2\sin 2x)$.
+
+\smallskip
+\noindent\textbf{Q23 — B.} Racine double $r_0$ : la solution comporte un facteur polynomial pour assurer l'indépendance des deux solutions : $y=(C_1+C_2 x)e^{r_0 x}$. A correspond au cas $\Delta>0$ (deux racines distinctes réelles), C au cas complexe.
+
+\smallskip
+\noindent\textbf{Q25 — D.} Un point critique annule toutes les dérivées partielles premières : $\nabla f(a,b)=\mathbf{0}$, c'est-à-dire $f_x(a,b)=0$ et $f_y(a,b)=0$. La valeur de $f$ en ce point n'a pas à être nulle.
+
+\smallskip
+\noindent\textbf{Q26 — B.} Critère de la hessienne : $H>0$ et $f_{xx}>0$ $\Rightarrow$ minimum local. $H>0$ et $f_{xx}<0$ $\Rightarrow$ maximum local. $H<0$ $\Rightarrow$ point selle.
+
+\smallskip
+\noindent\textbf{Q27 — C.} La présence de $\sqrt{x^2+y^2}=r$ et la symétrie circulaire du disque imposent les \emph{coordonnées polaires} : $dA = r\,dr\,d\theta$.
+
+\smallskip
+\noindent\textbf{Q28 — D.} Sur un rectangle, si $f(x,y)=g(x)\cdot h(y)$ (séparable), le théorème de Fubini donne $\iint_D f\,dA = \int g(x)\,dx\cdot\int h(y)\,dy$. Ici $xy = x\cdot y$.
+
+\smallskip
+\noindent\textbf{Q29 — C.} Si $H<0$, la hessienne est indéfinie (valeurs propres de signes opposés) : $(a,b)$ est un point selle. La valeur de $f_{xx}$ seule ne permet pas de conclure.
+
+\vspace{6pt}
+
+% ── Calculs détaillés ────────────────────────────────────────────────────────
+\noindent\textbf{Calculs détaillés}
+
+\smallskip
+\noindent\textbf{Q6.} On dérive $f(x,y) = x^2 e^y$ en traitant l'autre variable comme une constante :
+$$\frac{\partial f}{\partial x} = 2x\,e^y \qquad\qquad \frac{\partial f}{\partial y} = x^2 e^y$$
+
+\smallskip
+\noindent\textbf{Q12.} Pour $f(x,y) = x^3\sin(y)$ :
+$$\frac{\partial f}{\partial x} = 3x^2\sin(y) \qquad \frac{\partial f}{\partial y} = x^3\cos(y)$$
+On calcule la dérivée croisée de deux façons :
+$$\frac{\partial^2 f}{\partial x\partial y} = \frac{\partial}{\partial x}\bigl(x^3\cos y\bigr) = 3x^2\cos y \qquad \frac{\partial^2 f}{\partial y\partial x} = \frac{\partial}{\partial y}\bigl(3x^2\sin y\bigr) = 3x^2\cos y$$
+On vérifie bien $\dfrac{\partial^2 f}{\partial x\partial y} = \dfrac{\partial^2 f}{\partial y\partial x}$ \quad \checkmark \quad (Schwartz : $f\in\mathcal{C}^2$)
+
+\smallskip
+\noindent\textbf{Q18.} Pour $\mathbf{F}=(x^2,\,yz,\,xz)$ :
+$$\text{div}\,\mathbf{F} = \frac{\partial(x^2)}{\partial x} + \frac{\partial(yz)}{\partial y} + \frac{\partial(xz)}{\partial z} = 2x + z + x = \boxed{3x + z}$$
+
+\smallskip
+\noindent\textbf{Q24.} Équation caractéristique $r^2 - r - 6 = 0$ :
+$$\Delta = (-1)^2 - 4\times 1 \times(-6) = 1 + 24 = 25$$
+$$r = \frac{1\pm 5}{2} \qquad \Rightarrow \qquad r_1 = 3, \quad r_2 = -2$$
+Deux racines réelles distinctes $\Rightarrow$ solution générale :
+$$\boxed{y(x) = C_1 e^{3x} + C_2 e^{-2x}}$$
+
+\smallskip
+\noindent\textbf{Q30.} On applique Fubini en intégrant d'abord sur $y$ :
+$$\int_0^2(x+y)\,dy = \Bigl[xy+\frac{y^2}{2}\Bigr]_0^2 = 2x + 2$$
+Puis on intègre sur $x$ :
+$$\int_0^2(2x+2)\,dx = \Bigl[x^2+2x\Bigr]_0^2 = 4 + 4 = \boxed{8}$$
+
+\end{document}

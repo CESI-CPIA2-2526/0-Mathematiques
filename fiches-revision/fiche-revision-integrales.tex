@@ -1,0 +1,154 @@
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{parskip}
+
+\geometry{top=1.8cm, bottom=2cm, left=1.8cm, right=1.8cm}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textit{Mathématiques, fiche de révision}}
+\fancyhead[R]{\small\textit{Intégrales multiples}}
+\fancyfoot[C]{\small\thepage}
+\fancyfoot[R]{\tiny\textcopyright\ Rohan Fossé}
+\renewcommand{\headrulewidth}{0.3pt}
+
+\definecolor{bleu}{RGB}{30,60,120}
+\definecolor{vert}{RGB}{0,110,60}
+\definecolor{rouge}{RGB}{160,20,20}
+\definecolor{gris}{gray}{0.93}
+\definecolor{jauneclair}{RGB}{255,250,220}
+\definecolor{vertclair}{RGB}{220,245,220}
+\definecolor{bleutresleger}{RGB}{230,240,255}
+
+\newmdenv[backgroundcolor=gris, linewidth=0pt,
+  innerleftmargin=8pt, innerrightmargin=8pt,
+  innertopmargin=5pt, innerbottommargin=5pt,
+  skipabove=4pt, skipbelow=4pt]{grisbox}
+
+\newmdenv[backgroundcolor=jauneclair, linecolor=rouge, linewidth=1pt,
+  innerleftmargin=8pt, innerrightmargin=8pt,
+  innertopmargin=5pt, innerbottommargin=5pt,
+  skipabove=4pt, skipbelow=4pt]{alertbox}
+
+\newmdenv[backgroundcolor=bleutresleger, linecolor=bleu, linewidth=1pt,
+  innerleftmargin=8pt, innerrightmargin=8pt,
+  innertopmargin=5pt, innerbottommargin=5pt,
+  skipabove=4pt, skipbelow=4pt]{theobox}
+
+\titleformat{\section}[block]{\normalsize\bfseries\color{bleu}}{}{0pt}{}[\vspace{-3pt}\rule{\linewidth}{0.5pt}]
+\titlespacing{\section}{0pt}{10pt}{4pt}
+
+\titleformat{\subsection}[runin]{\small\bfseries\color{vert}}{}{0pt}{}[\ :]
+\titlespacing{\subsection}{0pt}{4pt}{0pt}
+
+\begin{document}
+
+\begin{center}
+  {\Large\bfseries\color{bleu} Fiche de révision : Intégrales multiples}\\[3pt]
+  {\small Intégrales doubles · Changements de variables · Intégrales triples · Green-Riemann}
+\end{center}
+\noindent\rule{\linewidth}{0.8pt}
+
+\begin{multicols}{2}
+
+\section{Intégrale double, théorème de Fubini}
+
+\begin{theobox}
+\textbf{Théorème de Fubini.} Sur un domaine $D=[a,b]\times[c,d]$ (rectangle) :
+$$\iint_D f(x,y)\,dA = \int_a^b\!\left(\int_c^d f(x,y)\,dy\right)dx$$
+$$= \int_c^d\!\left(\int_a^b f(x,y)\,dx\right)dy$$
+
+\textbf{Cas séparable :} si $f(x,y)=g(x)\cdot h(y)$ sur un rectangle :
+$$\iint_D f\,dA = \left(\int_a^b g(x)\,dx\right)\cdot\left(\int_c^d h(y)\,dy\right)$$
+\end{theobox}
+
+\section{Domaine non rectangulaire, inversion}
+
+\begin{grisbox}
+Sur un domaine général $D$, on intègre en identifiant les bornes variables.
+
+\textbf{Inversion de l'ordre :} le domaine $\{0\le x\le 1,\; x\le y\le 1\}$ est aussi $\{0\le y\le 1,\; 0\le x\le y\}$.
+
+$$\int_0^1\!\int_x^1 f(x,y)\,dy\,dx = \int_0^1\!\int_0^y f(x,y)\,dx\,dy$$
+
+\textbf{Méthode :} dessiner le domaine $D$, puis relire les bornes dans l'autre sens.
+\end{grisbox}
+
+\section{Coordonnées polaires}
+
+\begin{grisbox}
+$$x = r\cos\theta,\quad y = r\sin\theta,\quad dA = r\,dr\,d\theta$$
+
+\textbf{À utiliser quand :} domaine circulaire ou $\sqrt{x^2+y^2}$ apparaît dans $f$.
+
+Sur le disque $x^2+y^2\le R^2$ : $r\in[0,R]$, $\theta\in[0,2\pi]$.
+\end{grisbox}
+
+\section{Formule de Green-Riemann}
+
+\begin{theobox}
+Si $D$ est un domaine fermé borné à bord $\partial D$ orienté positivement (sens trigonométrique) :
+$$\boxed{\oint_{\partial D} P\,dx + Q\,dy = \iint_D \left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)dA}$$
+
+\textbf{Application -- Calcul d'aire :} avec $P=-y$, $Q=x$ :
+$$\mathrm{Aire}(D) = \frac{1}{2}\oint_{\partial D}(-y\,dx+x\,dy)$$
+\end{theobox}
+
+\section{Intégrales triples, coordonnées sphériques}
+
+\begin{grisbox}
+$$x=\rho\sin\varphi\cos\theta,\quad y=\rho\sin\varphi\sin\theta,\quad z=\rho\cos\varphi$$
+$$dV = \rho^2\sin\varphi\;d\rho\;d\varphi\;d\theta$$
+
+Bornes habituelles : $\rho\ge 0$, $\varphi\in[0,\pi]$, $\theta\in[0,2\pi]$.
+
+\textbf{Coordonnées cylindriques :}
+$$x=r\cos\theta,\ y=r\sin\theta,\ z=z,\quad dV=r\,dr\,d\theta\,dz$$
+\end{grisbox}
+
+\section{Applications}
+
+\textbf{Centre de gravité} (densité $\rho=1$, aire $A=\iint_D dA$) :
+$$\bar{x} = \frac{1}{A}\iint_D x\,dA \qquad \bar{y} = \frac{1}{A}\iint_D y\,dA$$
+
+\section{Récapitulatif : quand utiliser quoi ?}
+
+\begin{grisbox}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}lp{5cm}@{}}
+\textbf{Situation} & \textbf{Méthode} \\
+\hline
+Domaine rectangulaire & Fubini directement \\
+$f=g(x)\cdot h(y)$ & Séparation de Fubini \\
+Disque, anneau & Coordonnées polaires \\
+Boule, sphère & Coordonnées sphériques \\
+Cylindre & Coordonnées cylindriques \\
+Calcul d'aire par contour & Green-Riemann \\
+\end{tabular}
+\end{grisbox}
+
+\begin{alertbox}
+\textbf{Jacobiens à ne pas oublier !}
+\begin{itemize}[leftmargin=1em,itemsep=0pt]
+  \item Polaires : $dA = r\,dr\,d\theta$ (facteur $r$)
+  \item Sphériques : $dV = \rho^2\sin\varphi\,d\rho\,d\varphi\,d\theta$
+  \item Cylindriques : $dV = r\,dr\,d\theta\,dz$
+\end{itemize}
+\end{alertbox}
+
+\end{multicols}
+
+\end{document}
