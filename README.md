@@ -1,8 +1,8 @@
 # Mathématiques — CCTLs Blancs
 
-**Formation** : CPIA2 Informatique
-**Année universitaire** : 2025 / 2026
-**Établissement** : CESI
+- **Formation** : CPIA2 Informatique
+- **Année universitaire** : 2025 / 2026
+- **Établissement** : CESI
 
 ---
 
@@ -98,4 +98,5 @@ pdflatex nom-du-fichier.tex
 
 ## Licence
 
-Ces ressources sont destinées à un usage pédagogique interne à la promotion CPIA2 Info 2025/2026 du CESI. Toute redistribution ou réutilisation hors de ce cadre doit faire l'objet d'une autorisation préalable.
+Ces ressources sont destinées à un usage pédagogique interne à la promotion CPIA2 Info 2025/2026 du CESI.
+Toute redistribution ou réutilisation hors de ce cadre doit faire l'objet d'une autorisation préalable.
